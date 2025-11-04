@@ -1,0 +1,178 @@
+name: shop_nike_app
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 0.0.1+1
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  customizable_cupertino_dialog:
+    path: packages/customizable_cupertino_dialog
+
+  #splash screen
+  flutter_native_splash: ^2.4.6
+
+  #softonix core packages
+  stx_bloc_base: ^0.6.1
+  stx_flutter_form_bloc: ^3.0.0
+
+  #state management
+  provider: ^6.1.5+1
+  flutter_bloc: ^9.1.1
+
+  #dependency injection
+  get_it: ^8.2.0
+  injectable: ^2.5.1
+
+  #routing
+  auto_route: ^10.1.2
+
+  #a powerful Http client for Dart, which supports Interceptors, Global configuration, FormData,
+  #Request Cancellation, File downloading, Timeout etc.
+  dio: ^5.9.0
+  fresh_dio: ^0.4.3
+  dio_smart_retry: ^7.0.1
+
+  #code generator for unions/pattern-matching/copy.
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
+
+  #easy_localization and generator
+  easy_localization: ^3.0.8
+  stx_easy_localization_generator: ^1.0.1
+
+  #this package extends the native Iterable type with all of the LINQ methods that do not exist in native Dart
+  darq: ^2.1.0
+
+  #local storage
+  shared_preferences: ^2.5.3
+  flutter_secure_storage: ^9.2.4
+
+  #icons
+  font_awesome_flutter: ^10.10.0
+  cupertino_icons: ^1.0.8
+
+  #widgets
+  bouncing_widget: ^2.0.0
+  tab_indicator_styler: ^2.0.0
+  extended_nested_scroll_view: ^6.2.1
+
+  #others
+  upgrader: ^11.5.0
+
+dev_dependencies:
+  #testing
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  patrol: ^3.19.0
+  patrol_finders: ^2.9.0
+  mocktail: ^1.0.4
+  bloc_test: ^10.0.0
+
+  #builders
+  build_runner: ^2.7.0
+  flutter_gen_runner: ^5.11.0
+  auto_route_generator: ^10.2.4
+  injectable_generator: ^2.8.1
+  json_serializable: ^6.11.0
+  freezed: ^3.2.0
+
+  #lints
+  flutter_lints: ^6.0.0
+  very_good_analysis: ^9.0.0
+
+  #others
+  import_sorter: ^4.6.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - resources/langs/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+
+flutter_gen:
+  output: lib/styles/
+  line_length: 80
+
+  integrations:
+    flutter_svg: true
+    lottie: true
+    rive: true
+
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: false
+
+  fonts:
+    enabled: true
+
+  colors:
+    enabled: true
+    inputs:
+      - assets/colors/colors.xml
+
+import_sorter:
+  comments: false
+  ignored_files:
+    - \.g\.dart$
+    - \.config\.dart$
+    - \.freezed\.dart$
+    - \.gen\.dart$
+    - \.gr\.dart$
+    - \.mocks\.dart$
+
+flutter_native_splash:
+  web: false
+  color: "#000000"
+  image: assets/images/config/splash.png
+  branding: assets/images/config/branding.png
+  branding_mode: bottom
+  branding_bottom_padding: 40
+  android_12:
+    color: "#000000"
+    image: assets/images/config/splash.png
+    branding: assets/images/config/branding.png
+
+flutter_launcher_icons:
+  ios: true
+  android: true
+  remove_alpha_ios: true
+  image_path: "assets/images/config/app-icon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/images/config/app-icon.png"
+
+patrol:
+  app_name: ShopNikeApp
+  android:
+    package_name: com.example.shop_nike_app
+  ios:
+    bundle_id: com.example.shop_nike_app
+  
