@@ -69,6 +69,7 @@ dependencies:
 
   #others
   upgrader: ^11.5.0
+  flutter_svg: ^2.2.2
 
 dev_dependencies:
   #testing
@@ -102,6 +103,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/config/
     - resources/langs/
   fonts:
     - family: Poppins
@@ -116,6 +118,26 @@ flutter:
           weight: 700
         - asset: assets/fonts/Poppins-Italic.ttf
           style: italic
+    - family: HelveticaNowText
+      fonts:
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Bold.ttf
+          weight: 700
+    - family: Heebo
+      fonts:
+        - asset: assets/fonts/Heebo/Heebo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Heebo/Heebo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Heebo/Heebo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Heebo/Heebo-Bold.ttf
+          weight: 700
+
+     
 
 flutter_gen:
   output: lib/styles/

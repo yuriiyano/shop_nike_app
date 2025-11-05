@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/repositories/index.dart';
+import 'package:shop_nike_app/blocs/auth/onboarding_state_storage.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
@@ -15,18 +16,21 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
   final UserRepository userRepository;
+  final OnboardingStateStorage onboardingStorage;
 
   late final StreamSubscription<AuthStatus> _subscription;
 
   AuthBloc({
     required this.authRepository,
     required this.userRepository,
+    required this.onboardingStorage,
   }) : super(const AuthState()) {
     _subscription = authRepository.authenticationStatus.listen((status) {
       add(AuthEvent.authenticationStatusChanged(status));
     });
 
     on<_AuthenticationStatusChanged>(_authenticationStatusChanged);
+    on<_FinishOnboarding>(_finishOnboarding);
     on<_SignOut>(_signOut);
   }
 
@@ -34,7 +38,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _AuthenticationStatusChanged event,
     Emitter<AuthState> emit,
   ) async {
-    if (event.status == AuthStatus.authenticated) {
+    if (event.status.isAuthenticated) {
       try {
         final userProfile = await userRepository.getUserProfile();
 
@@ -44,6 +48,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         emit(AuthState.unauthenticated());
       }
+    } else if (event.status.isUnauthenticated) {
+      final seenOnboarding = onboardingStorage.read();
+      if (seenOnboarding) {
+        emit(AuthState.unauthenticated());
+      } else {
+        emit(AuthState.onboarding());
+      }
     } else {
       emit(
         state.copyWith(
@@ -52,6 +63,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     }
+  }
+
+  FutureOr<void> _finishOnboarding(
+    _FinishOnboarding event,
+    Emitter<AuthState> emit,
+  ) {
+    onboardingStorage.write();
+    emit(AuthState.unauthenticated());
   }
 
   FutureOr<void> _signOut(_SignOut event, Emitter<AuthState> emit) {

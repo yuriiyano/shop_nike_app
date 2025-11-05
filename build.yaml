@@ -48,6 +48,7 @@ targets:
             - lib/**_repository.dart
             - lib/**_provider.dart
             - lib/**_client.dart
+            - lib/blocs/**.dart
       injectable_generator:injectable_config_builder:
         enabled: true
         generate_for:

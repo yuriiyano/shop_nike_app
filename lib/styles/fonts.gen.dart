@@ -11,6 +11,12 @@
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Heebo
+  static const String heebo = 'Heebo';
+
+  /// Font family: HelveticaNowText
+  static const String helveticaNowText = 'HelveticaNowText';
+
   /// Font family: Poppins
   static const String poppins = 'Poppins';
 }

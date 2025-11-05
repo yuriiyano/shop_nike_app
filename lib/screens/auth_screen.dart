@@ -30,6 +30,9 @@ class AuthScreen extends StatelessWidget {
             switch (state.status) {
               case AuthStatus.initial:
                 return [];
+              case AuthStatus.onboarding:
+                _removeSplashScreen();
+                return [const OnboardingRoute()];
               case AuthStatus.unauthenticated:
                 _removeSplashScreen();
                 return [const LoginRoute()];

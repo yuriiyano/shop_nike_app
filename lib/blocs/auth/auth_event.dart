@@ -6,4 +6,5 @@ class AuthEvent with _$AuthEvent {
     AuthStatus status,
   ) = _AuthenticationStatusChanged;
   const factory AuthEvent.signOut() = _SignOut;
+  const factory AuthEvent.finishOnboarding() = _FinishOnboarding;
 }
