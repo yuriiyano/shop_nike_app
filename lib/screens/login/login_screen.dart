@@ -49,10 +49,9 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(top: 10),
-                          child: Assets.images.logo.image(
+                          child: Assets.images.logo.svg(
                             width: 180,
                             height: 90,
-                            fit: BoxFit.contain,
                           ),
                         ),
                         const LoginForm(),

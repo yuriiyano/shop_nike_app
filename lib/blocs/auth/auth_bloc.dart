@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/repositories/index.dart';
-import 'package:shop_nike_app/blocs/auth/onboarding_state_storage.dart';
+import 'onboarding_state_storage.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
@@ -49,7 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthState.unauthenticated());
       }
     } else if (event.status.isUnauthenticated) {
-      final seenOnboarding = onboardingStorage.read();
+      final seenOnboarding = await onboardingStorage.read();
       if (seenOnboarding) {
         emit(AuthState.unauthenticated());
       } else {
@@ -69,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _FinishOnboarding event,
     Emitter<AuthState> emit,
   ) {
-    onboardingStorage.write();
+    onboardingStorage.write(onboardingStateValue: true);
     emit(AuthState.unauthenticated());
   }
 

@@ -1,21 +1,21 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:shop_nike_app/core/constants/index.dart';
+import 'package:shop_nike_app/core/index.dart';
 
 @Injectable(scope: 'auth')
 class OnboardingStateStorage {
-  const OnboardingStateStorage({required SharedPreferences prefs})
-    : _prefs = prefs;
   final SharedPreferences _prefs;
 
-  bool read() {
-    return _prefs.getBool(AppConstants.rememberOnboardingStateKey) ?? false;
+  const OnboardingStateStorage(this._prefs);
+
+  Future<bool> read() {
+    return Future.value(
+      _prefs.getBool(AppConstants.rememberOnboardingStateKey) ?? false,
+    );
   }
 
-  Future<bool> write({bool onboardingStateValue = true}) {
-    if (onboardingStateValue == read()) return Future.value(true);
-
+  Future<bool> write({required bool onboardingStateValue}) {
     return _prefs.setBool(
       AppConstants.rememberOnboardingStateKey,
       onboardingStateValue,

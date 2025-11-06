@@ -37,9 +37,7 @@ extension GetItInjectableX on _i174.GetIt {
       init: (_i526.GetItHelper gh) {
         gh.singleton<_i776.HttpClient>(() => _i776.HttpClient());
         gh.factory<_i454.OnboardingStateStorage>(
-          () => _i454.OnboardingStateStorage(
-            prefs: gh<_i460.SharedPreferences>(),
-          ),
+          () => _i454.OnboardingStateStorage(gh<_i460.SharedPreferences>()),
         );
         gh.factory<_i380.AuthRepository>(
           () => _i380.AuthRepository(gh<_i892.HttpClient>()),

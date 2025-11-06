@@ -24,22 +24,15 @@ class $ResourcesGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// Directory path: assets/images/config
-  $AssetsImagesConfigGen get config => const $AssetsImagesConfigGen();
-
-  /// File path: assets/images/logo-short.png
-  AssetGenImage get logoShort =>
-      const AssetGenImage('assets/images/logo-short.png');
-
-  /// File path: assets/images/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+  /// File path: assets/images/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
 
   /// File path: assets/images/onboarding-background.png
   AssetGenImage get onboardingBackground =>
       const AssetGenImage('assets/images/onboarding-background.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [logoShort, logo, onboardingBackground];
+  List<dynamic> get values => [logo, onboardingBackground];
 }
 
 class $ResourcesLangsGen {
@@ -53,28 +46,6 @@ class $ResourcesLangsGen {
 
   /// List of all assets
   List<String> get values => [enUS, frFR];
-}
-
-class $AssetsImagesConfigGen {
-  const $AssetsImagesConfigGen();
-
-  /// File path: assets/images/config/app-icon.png
-  AssetGenImage get appIcon =>
-      const AssetGenImage('assets/images/config/app-icon.png');
-
-  /// File path: assets/images/config/ddd.png
-  AssetGenImage get ddd => const AssetGenImage('assets/images/config/ddd.png');
-
-  /// File path: assets/images/config/onboarding-app-icon.svg
-  SvgGenImage get onboardingAppIcon =>
-      const SvgGenImage('assets/images/config/onboarding-app-icon.svg');
-
-  /// File path: assets/images/config/splash.png
-  AssetGenImage get splash =>
-      const AssetGenImage('assets/images/config/splash.png');
-
-  /// List of all assets
-  List<dynamic> get values => [appIcon, ddd, onboardingAppIcon, splash];
 }
 
 class Assets {

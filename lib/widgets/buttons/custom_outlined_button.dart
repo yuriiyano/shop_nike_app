@@ -2,19 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_nike_app/styles/index.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
-  final String text;
-  final void Function() onPressed;
-  final double? width;
-  final String fontFamily;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final Color borderColor;
-  final Color textColor;
-  final double borderRadius;
-  final EdgeInsetsGeometry padding;
-  final double borderWidth;
-  final Color? backgroundColor;
-
   const CustomOutlinedButton({
     super.key,
     required this.text,
@@ -30,6 +17,19 @@ class CustomOutlinedButton extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(vertical: 16),
     this.backgroundColor = Colors.transparent,
   });
+
+  final String text;
+  final void Function() onPressed;
+  final double? width;
+  final String fontFamily;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final Color borderColor;
+  final Color textColor;
+  final double borderRadius;
+  final EdgeInsetsGeometry padding;
+  final double borderWidth;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {

@@ -66,10 +66,10 @@ dependencies:
   bouncing_widget: ^2.0.0
   tab_indicator_styler: ^2.0.0
   extended_nested_scroll_view: ^6.2.1
+  flutter_svg: ^2.2.2
 
   #others
   upgrader: ^11.5.0
-  flutter_svg: ^2.2.2
 
 dev_dependencies:
   #testing
@@ -103,7 +103,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/config/
     - resources/langs/
   fonts:
     - family: Poppins

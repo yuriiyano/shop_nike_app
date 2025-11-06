@@ -16,7 +16,7 @@ sealed class AuthState with _$AuthState {
     status: AuthStatus.unauthenticated,
   );
 
-    factory AuthState.onboarding() => const AuthState(
+  factory AuthState.onboarding() => const AuthState(
     status: AuthStatus.onboarding,
   );
 }
