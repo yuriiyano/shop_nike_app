@@ -30,13 +30,7 @@ class AppDrawer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundColor: AppColors.black,
-                      backgroundImage: AssetImage(Assets.images.logoShort.path),
-                    ),
-                  ],
+                  children: [Assets.images.logo.svg()],
                 ),
                 const Divider(height: 20),
                 Padding(

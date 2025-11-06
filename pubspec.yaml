@@ -66,6 +66,7 @@ dependencies:
   bouncing_widget: ^2.0.0
   tab_indicator_styler: ^2.0.0
   extended_nested_scroll_view: ^6.2.1
+  flutter_svg: ^2.2.2
 
   #others
   upgrader: ^11.5.0
@@ -116,6 +117,26 @@ flutter:
           weight: 700
         - asset: assets/fonts/Poppins-Italic.ttf
           style: italic
+    - family: HelveticaNowText
+      fonts:
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/HelveticaNowText/HelveticaNowText-Bold.ttf
+          weight: 700
+    - family: Heebo
+      fonts:
+        - asset: assets/fonts/Heebo/Heebo-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Heebo/Heebo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Heebo/Heebo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Heebo/Heebo-Bold.ttf
+          weight: 700
+
+     
 
 flutter_gen:
   output: lib/styles/

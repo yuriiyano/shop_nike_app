@@ -104,6 +104,26 @@ class __$AuthenticationStatusChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
+class _FinishOnboarding implements AuthEvent {
+  const _FinishOnboarding();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _FinishOnboarding);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'AuthEvent.finishOnboarding()';
+  }
+}
+
+/// @nodoc
+
 class _SignOut implements AuthEvent {
   const _SignOut();
 

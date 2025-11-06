@@ -27,14 +27,17 @@ class AuthScreen extends StatelessWidget {
       builder: (context, state) {
         return AutoRouter.declarative(
           routes: (_) {
+            if (!state.status.isInitial) {
+              _removeSplashScreen();
+            }
             switch (state.status) {
               case AuthStatus.initial:
                 return [];
+              case AuthStatus.onboarding:
+                return [const OnboardingRoute()];
               case AuthStatus.unauthenticated:
-                _removeSplashScreen();
                 return [const LoginRoute()];
               case AuthStatus.authenticated:
-                _removeSplashScreen();
                 return [const HomeRouter()];
             }
           },
