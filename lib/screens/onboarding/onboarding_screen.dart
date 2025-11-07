@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/annotations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shop_nike_app/blocs/index.dart';
@@ -13,12 +12,14 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSmallScreen = MediaQuery.sizeOf(context).width < 400;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
           Assets.images.onboardingBackground.image(
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
@@ -50,17 +51,17 @@ class OnboardingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Assets.images.logo.svg(),
-                        const SizedBox(height: 48),
-                        const Text(
+                        SizedBox(height: isSmallScreen ? 15 : 48),
+                        Text(
                           'Nike App\nBringing Nike Members the best products, inspiration and stories in sport.',
                           style: TextStyle(
                             fontFamily: FontFamily.helveticaNowText,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                            fontSize: 32,
+                            fontSize: isSmallScreen ? 27 : 32,
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: isSmallScreen ? 14 : 24),
                         CustomOutlinedButton(
                           text: 'Sign In',
                           width: double.infinity,
