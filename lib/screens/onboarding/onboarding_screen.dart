@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:auto_route/annotations.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSmallScreen = MediaQuery.sizeOf(context).width < 400;
+    final isSmallScreen = MediaQuery.sizeOf(context).height <= 670;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -39,44 +40,39 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              const Spacer(),
-              Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Assets.images.logo.svg(),
-                        SizedBox(height: isSmallScreen ? 16 : 48),
-                        Text(
-                          'Nike App\nBringing Nike Members the best products, inspiration and stories in sport.',
-                          style: TextStyle(
-                            fontFamily: FontFamily.helveticaNowText,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            fontSize: isSmallScreen ? 28 : 32,
-                          ),
-                        ),
-                        SizedBox(height: isSmallScreen ? 14 : 24),
-                        CustomOutlinedButton(
-                          text: 'Sign In',
-                          width: double.infinity,
-                          onPressed: () {
-                            context.read<AuthBloc>().add(
-                              const AuthEvent.finishOnboarding(),
-                            );
-                          },
-                        ),
-                      ],
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Assets.images.logo.svg(),
+                  SizedBox(height: isSmallScreen ? 16 : 48),
+                  Text(
+                    'Nike App\nBringing Nike Members the best products, inspiration and stories in sport.',
+                    style: TextStyle(
+                      fontFamily: FontFamily.helveticaNowText,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                      fontSize: isSmallScreen ? 28 : 32,
                     ),
                   ),
-                ),
+                  SizedBox(height: isSmallScreen ? 14 : 24),
+                  CustomOutlinedButton(
+                    text: 'Sign In',
+                    width: double.infinity,
+                    onPressed: () {
+                      context.read<AuthBloc>().add(
+                        const AuthEvent.finishOnboarding(),
+                      );
+                    },
+                  ),
+                  SizedBox(height: isSmallScreen ? 60 : 100),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

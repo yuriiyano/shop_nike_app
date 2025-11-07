@@ -13,9 +13,15 @@ class AuthRepository {
       httpClient.authenticationStatus;
 
   Future<void> signIn(String userName, String password) async {
-    await Future.delayed(const Duration(seconds: 2));
+    final response = await httpClient.post<DynamicMap>(
+      '/auth/login',
+      data: {
+        'username': userName,
+        'password': password,
+      },
+    );
 
-    return httpClient.setToken('token');
+    return httpClient.setToken(response['token']);
   }
 
   Future<void> signOut() {

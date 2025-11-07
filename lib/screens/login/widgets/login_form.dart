@@ -19,18 +19,19 @@ class LoginForm extends StatelessWidget {
           key: const Key('username'),
           label: 'Username',
           fieldBloc: formBloc.username,
+          hintText: 'Username',
         ),
+        const SizedBox(height: 8),
         TextInputFormBuilder(
           key: const Key('password'),
           isObscureText: true,
           label: 'Password',
+          hintText: 'Password',
           fieldBloc: formBloc.password,
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 14, bottom: 10),
-          child: LoginButton(
-            onPressed: () => context.read<LoginFormBloc>().submit(),
-          ),
+        const SizedBox(height: 36),
+        LoginButton(
+          onPressed: () => context.read<LoginFormBloc>().submit(),
         ),
       ],
     );

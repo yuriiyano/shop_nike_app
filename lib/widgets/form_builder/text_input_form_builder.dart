@@ -34,14 +34,19 @@ class TextInputFormBuilder extends StatefulWidget {
 class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
   late final TextEditingController _controller;
 
+  late bool _isObscureTextDynamic;
+
   @override
   void initState() {
     _controller = TextEditingController(text: widget.fieldBloc.value);
+    _isObscureTextDynamic = widget.isObscureText;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    const textInputMainColor = Color.fromARGB(255, 118, 118, 118);
+
     return BlocBuilder<TextFieldBloc, TextFieldBlocState>(
       bloc: widget.fieldBloc,
       builder: (context, state) {
@@ -66,26 +71,73 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
               widget.fieldBloc.focusChanged();
             }
           },
-          child: TextField(
-            controller: _controller,
-            autocorrect: false,
-            textInputAction: TextInputAction.next,
-            focusNode: widget.fieldFocusNode,
-            obscureText: widget.isObscureText,
-            onChanged: (value) => widget.fieldBloc.changeValue(value),
-            onSubmitted: (value) {
-              widget.nextFieldFocusNode?.requestFocus();
-              widget.onSubmit?.call();
-            },
-            decoration: InputDecoration(
-              hintText: widget.hintText,
-              errorText: state.displayError,
-              helperText: '',
-              helperMaxLines: 1,
-              errorMaxLines: 1,
-              helperStyle: AppTextStyles.error,
-              errorStyle: AppTextStyles.error,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.label,
+                style: const TextStyle(
+                  color: textInputMainColor,
+                  fontSize: 12,
+                  letterSpacing: 0,
+                  fontFamily: FontFamily.lato,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(height: 7),
+              TextField(
+                controller: _controller,
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                focusNode: widget.fieldFocusNode,
+                obscureText: _isObscureTextDynamic,
+                onChanged: (value) => widget.fieldBloc.changeValue(value),
+                onSubmitted: (value) {
+                  widget.nextFieldFocusNode?.requestFocus();
+                  widget.onSubmit?.call();
+                },
+
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  hintStyle: const TextStyle(
+                    color: textInputMainColor,
+                    fontSize: 16,
+                    letterSpacing: 0,
+                    fontFamily: FontFamily.lato,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                  ),
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    borderSide: BorderSide(
+                      color: textInputMainColor,
+                    ),
+                  ),
+                  errorText: state.displayError,
+                  helperText: '',
+                  helperMaxLines: 1,
+                  errorMaxLines: 1,
+                  helperStyle: AppTextStyles.error,
+                  errorStyle: AppTextStyles.error,
+                  suffixIconColor: widget.isObscureText ? Colors.black : null,
+                  suffixIcon: widget.isObscureText
+                      ? IconButton(
+                          icon: Icon(
+                            _isObscureTextDynamic
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () => setState(
+                            () =>
+                                _isObscureTextDynamic = !_isObscureTextDynamic,
+                          ),
+                        )
+                      : null,
+                ),
+              ),
+            ],
           ),
         );
       },
