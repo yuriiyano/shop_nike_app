@@ -26,6 +26,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
+    final isSmallScreen = screenSize.height <= 670;
 
     return CustomFormBlocListener(
       formBloc: context.read<LoginFormBloc>(),
@@ -37,13 +38,11 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
           child: SingleChildScrollView(
             child: SizedBox(
               height: max(screenSize.height, 600),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Spacer(flex: 17),
-                  Expanded(
-                    flex: 83,
-                    child: Padding(
+              child: Padding(
+                padding: EdgeInsets.only(top: isSmallScreen ? 100 : 138),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 36),
                       child: SizedBox(
                         width: double.infinity,
@@ -75,8 +74,8 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

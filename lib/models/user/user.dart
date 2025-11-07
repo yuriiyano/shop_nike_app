@@ -1,8 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:shop_nike_app/core/index.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
+part 'user.a.dart';
 
 @freezed
 sealed class UserProfile with _$UserProfile {
@@ -54,13 +56,4 @@ sealed class UserFullname with _$UserFullname {
 
   factory UserFullname.fromJson(Map<String, dynamic> json) =>
       _$UserFullnameFromJson(json);
-}
-
-extension UserProfileX on UserProfile {
-  String get fullName {
-    final first = name.firstname?.trim() ?? '';
-    final last = name.lastname?.trim() ?? '';
-    final combined = '${first.capitalizeFirst} ${last.capitalizeFirst}'.trim();
-    return combined.isNotEmpty ? combined : username;
-  }
 }

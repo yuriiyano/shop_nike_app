@@ -21,7 +21,7 @@ class LoginForm extends StatelessWidget {
           fieldBloc: formBloc.username,
           hintText: 'Username',
         ),
-        const SizedBox(height: 7),
+        const SizedBox(height: 8),
         TextInputFormBuilder(
           key: const Key('password'),
           isObscureText: true,
