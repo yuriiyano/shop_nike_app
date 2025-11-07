@@ -51,14 +51,14 @@ class OnboardingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Assets.images.logo.svg(),
-                        SizedBox(height: isSmallScreen ? 15 : 48),
+                        SizedBox(height: isSmallScreen ? 16 : 48),
                         Text(
                           'Nike App\nBringing Nike Members the best products, inspiration and stories in sport.',
                           style: TextStyle(
                             fontFamily: FontFamily.helveticaNowText,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
-                            fontSize: isSmallScreen ? 27 : 32,
+                            fontSize: isSmallScreen ? 28 : 32,
                           ),
                         ),
                         SizedBox(height: isSmallScreen ? 14 : 24),
