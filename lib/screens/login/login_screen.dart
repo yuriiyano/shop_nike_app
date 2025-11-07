@@ -25,8 +25,7 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final mainContainerWidth = screenSize.width * 0.85;
+    final screenSize = MediaQuery.sizeOf(context);
 
     return CustomFormBlocListener(
       formBloc: context.read<LoginFormBloc>(),
@@ -34,29 +33,47 @@ class LoginScreen extends StatelessWidget implements AutoRouteWrapper {
         resizeToAvoidBottomInset: true,
         body: Container(
           width: double.infinity,
-          color: Colors.lightBlue,
+          color: Colors.white,
           child: SingleChildScrollView(
             child: SizedBox(
               height: max(screenSize.height, 600),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  CustomCard(
-                    width: mainContainerWidth,
-                    height: 450,
-                    slotWidget: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Assets.images.logo.svg(
-                            width: 180,
-                            height: 90,
-                          ),
+                  const Spacer(flex: 17),
+                  Expanded(
+                    flex: 83,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 36),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Assets.images.logo.svg(
+                              width: 50,
+                              height: 18,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.black,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            const SizedBox(height: 32),
+                            const Text(
+                              'Sign in',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 28,
+                                letterSpacing: -1,
+                                fontFamily: FontFamily.lato,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(height: 40),
+                            const LoginForm(),
+                          ],
                         ),
-                        const LoginForm(),
-                        const Spacer(),
-                      ],
+                      ),
                     ),
                   ),
                 ],

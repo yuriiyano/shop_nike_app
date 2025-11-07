@@ -17,6 +17,9 @@ class FontFamily {
   /// Font family: HelveticaNowText
   static const String helveticaNowText = 'HelveticaNowText';
 
+  /// Font family: Lato
+  static const String lato = 'Lato';
+
   /// Font family: Poppins
   static const String poppins = 'Poppins';
 }

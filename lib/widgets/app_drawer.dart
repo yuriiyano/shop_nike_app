@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shop_nike_app/blocs/index.dart';
 import 'package:shop_nike_app/localization/index.dart';
+import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/services/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
 
@@ -13,6 +15,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
+    final authBloc = context.read<AuthBloc>();
 
     return Container(
       width: screenSize.width * 0.75,
@@ -27,11 +30,14 @@ class AppDrawer extends StatelessWidget {
             height: screenSize.height,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Assets.images.logo.svg()],
+                Assets.images.logo.svg(
+                  colorFilter: const ColorFilter.mode(
+                    Colors.black,
+                    BlendMode.srcIn,
+                  ),
                 ),
+                const SizedBox(height: 20),
+                Text(authBloc.state.userProfile.fullName),
                 const Divider(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
