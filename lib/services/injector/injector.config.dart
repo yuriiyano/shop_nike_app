@@ -33,6 +33,9 @@ import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
 import 'package:shop_nike_app/services/http/http_client.dart' as _i776;
 import 'package:shop_nike_app/services/http/index.dart' as _i892;
 import 'package:shop_nike_app/services/index.dart' as _i869;
+import 'package:shop_nike_app/services/message/implementation/toast_message_service.dart'
+    as _i1050;
+import 'package:shop_nike_app/services/message/index.dart' as _i301;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of auth-scope dependencies inside of GetIt
@@ -41,7 +44,10 @@ extension GetItInjectableX on _i174.GetIt {
       'auth',
       dispose: dispose,
       init: (_i526.GetItHelper gh) {
-        gh.singleton<_i776.HttpClient>(() => _i776.HttpClient());
+        gh.singleton<_i301.MessageService>(() => _i1050.ToastMessageService());
+        gh.singleton<_i776.HttpClient>(
+          () => _i776.HttpClient(messageService: gh<_i301.MessageService>()),
+        );
         gh.factory<_i454.OnboardingStateStorage>(
           () => _i454.OnboardingStateStorage(gh<_i460.SharedPreferences>()),
         );

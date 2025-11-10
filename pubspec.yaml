@@ -68,6 +68,7 @@ dependencies:
   extended_nested_scroll_view: ^6.2.1
   flutter_svg: ^2.2.2
   cached_network_image: ^3.4.1
+  bot_toast: ^4.1.3
 
   #others
   upgrader: ^11.5.0

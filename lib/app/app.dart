@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/services/index.dart';
@@ -22,7 +23,7 @@ class ShopNikeApp extends StatelessWidget {
         builder: (context, child) {
           return AppUpgraderDialog(
             navigatorKey: _appRouter.navigatorKey,
-            child: child,
+            child: BotToastInit()(context, child),
           );
         },
         routerConfig: _appRouter.config(

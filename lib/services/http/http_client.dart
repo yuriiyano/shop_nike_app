@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:shop_nike_app/models/general_models.dart';
 import 'package:shop_nike_app/services/index.dart';
+import 'package:shop_nike_app/services/message/index.dart';
 
 @Singleton(scope: 'auth')
 class HttpClient {
@@ -13,6 +14,7 @@ class HttpClient {
   final JsonDataParser _parser;
 
   HttpClient({
+    required MessageService messageService,
     @ignoreParam Dio? dio,
     @ignoreParam Fresh<String>? fresh,
     @ignoreParam JsonDataParser? parser,
@@ -40,7 +42,7 @@ class HttpClient {
 
     _dio.interceptors.addAll([
       _fresh,
-      HttpInterceptor(LoggerService.instance),
+      HttpInterceptor(LoggerService.instance, messageService),
       RetryInterceptor(
         dio: _dio,
         logPrint: LoggerService.instance.log,

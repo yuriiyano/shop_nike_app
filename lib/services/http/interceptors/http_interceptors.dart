@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 
 import 'package:shop_nike_app/services/logger/index.dart';
+import 'package:shop_nike_app/services/message/index.dart';
 
 class HttpInterceptor extends Interceptor {
   final Logger logger;
+  final MessageService messageService;
 
-  HttpInterceptor(this.logger);
+  HttpInterceptor(this.logger, this.messageService);
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -16,6 +18,7 @@ class HttpInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     logger.logError(err, err.stackTrace);
+    messageService.showNetworkError(err);
     return super.onError(err, handler);
   }
 }
