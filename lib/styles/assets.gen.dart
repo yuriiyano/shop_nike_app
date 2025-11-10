@@ -24,6 +24,9 @@ class $ResourcesGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/dashboard
+  $AssetsImagesDashboardGen get dashboard => const $AssetsImagesDashboardGen();
+
   /// File path: assets/images/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
 
@@ -46,6 +49,17 @@ class $ResourcesLangsGen {
 
   /// List of all assets
   List<String> get values => [enUS, frFR];
+}
+
+class $AssetsImagesDashboardGen {
+  const $AssetsImagesDashboardGen();
+
+  /// File path: assets/images/dashboard/dashboard_main.png
+  AssetGenImage get dashboardMain =>
+      const AssetGenImage('assets/images/dashboard/dashboard_main.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [dashboardMain];
 }
 
 class Assets {
