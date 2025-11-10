@@ -9,28 +9,29 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     required this.product,
-    required this.productCardWidth,
+    required this.width,
   });
 
   final Product product;
-  final double productCardWidth;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
+    
     return SizedBox(
-      width: productCardWidth,
+      width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: productCardWidth,
-            height: productCardWidth,
+            width: width,
+            height: width,
             color: Colors.grey.shade200,
             child: Align(
               child: CachedNetworkImage(
                 imageUrl: product.image,
-                width: productCardWidth * 0.8,
-                height: productCardWidth * 0.8,
+                width: width * 0.8,
+                height: width * 0.8,
                 fit: BoxFit.cover,
               ),
             ),

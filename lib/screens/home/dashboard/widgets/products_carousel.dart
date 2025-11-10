@@ -7,20 +7,23 @@ class ProductsCarousel extends StatelessWidget {
   const ProductsCarousel({
     super.key,
     required this.products,
-    required this.productCardWidth,
     required this.carouselHeight,
-    required this.cardsGap,
     required this.carouselHorizontalPadding,
+    required this.cardWidth,
+    required this.cardsGap,
   });
 
   final List<Product> products;
-  final double productCardWidth;
+
   final double carouselHeight;
-  final double cardsGap;
   final double carouselHorizontalPadding;
+
+  final double cardWidth;
+  final double cardsGap;
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       height: carouselHeight,
       child: ListView.builder(
@@ -28,6 +31,7 @@ class ProductsCarousel extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final product = products[index];
+
           return Padding(
             padding: EdgeInsets.only(
               left: index == 0 ? carouselHorizontalPadding : cardsGap,
@@ -37,7 +41,7 @@ class ProductsCarousel extends StatelessWidget {
             ),
             child: ProductCard(
               product: product,
-              productCardWidth: productCardWidth,
+              width: cardWidth,
             ),
           );
         },

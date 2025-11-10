@@ -15,12 +15,14 @@ class DashboardScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     context.read<DashboardBloc>().load();
+
     return this;
   }
 
   @override
   Widget build(BuildContext context) {
     const double horizontalPadding = 24;
+
     return SafeArea(
       child: Scaffold(
         body: RefreshIndicator(
@@ -106,15 +108,16 @@ class DashboardScreen extends StatelessWidget implements AutoRouteWrapper {
                       case NetworkStatus.success:
                         return LayoutBuilder(
                           builder: (context, constaint) {
-                            final productCardWidth =
+                            final cardWidth =
                                 constaint.maxWidth - horizontalPadding * 2 - 10;
                             final carouselHeight = constaint.maxWidth + 40;
+
                             return ProductsCarousel(
                               products: state.data,
-                              productCardWidth: productCardWidth,
                               carouselHeight: carouselHeight,
-                              cardsGap: horizontalPadding / 4,
                               carouselHorizontalPadding: horizontalPadding,
+                              cardWidth: cardWidth,
+                              cardsGap: horizontalPadding / 4,
                             );
                           },
                         );

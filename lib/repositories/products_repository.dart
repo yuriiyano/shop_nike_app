@@ -14,6 +14,9 @@ class ProductsRepository {
   }
 
   Future<List<Product>> getProducts({required int limit}) {
-    return httpClient.get<List<Product>>('/products?limit=${max(1, limit)}');
+    return httpClient.get<List<Product>>(
+      '/products',
+      queryParameters: {'limit': max(1, limit)},
+    );
   }
 }
