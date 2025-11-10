@@ -19,7 +19,12 @@ import 'package:shop_nike_app/repositories/auth_repository.dart' as _i380;
 import 'package:shop_nike_app/repositories/chats_repository.dart' as _i970;
 import 'package:shop_nike_app/repositories/index.dart' as _i893;
 import 'package:shop_nike_app/repositories/posts_repository.dart' as _i399;
+import 'package:shop_nike_app/repositories/products_repository.dart' as _i616;
 import 'package:shop_nike_app/repositories/user_repository.dart' as _i447;
+import 'package:shop_nike_app/screens/home/dashboard/dashboard_bloc.dart'
+    as _i260;
+import 'package:shop_nike_app/screens/home/dashboard1_test/bloc/dashboard1_bloc.dart'
+    as _i392;
 import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i468;
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
@@ -27,6 +32,7 @@ import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
 import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
 import 'package:shop_nike_app/services/http/http_client.dart' as _i776;
 import 'package:shop_nike_app/services/http/index.dart' as _i892;
+import 'package:shop_nike_app/services/index.dart' as _i869;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of auth-scope dependencies inside of GetIt
@@ -71,6 +77,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i399.PostsRepository>(
       () => _i399.PostsRepository(gh<_i892.HttpClient>()),
+    );
+    gh.factory<_i616.ProductsRepository>(
+      () => _i616.ProductsRepository(gh<_i869.HttpClient>()),
+    );
+    gh.lazySingleton<_i260.DashboardBloc>(
+      () => _i260.DashboardBloc(
+        productsRepository: gh<_i893.ProductsRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i392.Dashboard1Bloc>(
+      () => _i392.Dashboard1Bloc(
+        productsRepository: gh<_i893.ProductsRepository>(),
+      ),
     );
     gh.lazySingleton<_i468.ChatsBloc>(
       () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),

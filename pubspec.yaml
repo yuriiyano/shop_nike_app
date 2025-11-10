@@ -67,6 +67,7 @@ dependencies:
   tab_indicator_styler: ^2.0.0
   extended_nested_scroll_view: ^6.2.1
   flutter_svg: ^2.2.2
+  cached_network_image: ^3.4.1
 
   #others
   upgrader: ^11.5.0
@@ -103,6 +104,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/dashboard/
     - resources/langs/
   fonts:
     - family: Poppins
