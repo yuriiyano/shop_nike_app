@@ -7,7 +7,7 @@ import 'package:shop_nike_app/styles/index.dart';
 import '../index.dart';
 
 @Singleton(scope: 'auth', as: MessageService)
-class ToastMessageService extends MessageService {
+class ToastMessageService implements MessageService {
   @override
   void showNetworkError(DioException error) {
     showError(_getNetworkErrorMessage(error));

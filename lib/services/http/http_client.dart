@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 
 import 'package:shop_nike_app/models/general_models.dart';
 import 'package:shop_nike_app/services/index.dart';
-import 'package:shop_nike_app/services/message/index.dart';
 
 @Singleton(scope: 'auth')
 class HttpClient {

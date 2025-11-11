@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'package:shop_nike_app/services/logger/index.dart';
-import 'package:shop_nike_app/services/message/index.dart';
+import 'package:shop_nike_app/services/index.dart';
 
 class HttpInterceptor extends Interceptor {
   final Logger logger;

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-abstract class MessageService {
+abstract interface class MessageService {
   void showNetworkError(DioException error);
   void showError(String message);
 }
