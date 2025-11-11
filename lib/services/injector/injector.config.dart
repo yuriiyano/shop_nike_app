@@ -17,6 +17,8 @@ import 'package:shop_nike_app/blocs/auth/onboarding_state_storage.dart'
     as _i454;
 import 'package:shop_nike_app/repositories/auth_repository.dart' as _i380;
 import 'package:shop_nike_app/repositories/chats_repository.dart' as _i970;
+import 'package:shop_nike_app/repositories/favorite_products_repository.dart'
+    as _i452;
 import 'package:shop_nike_app/repositories/index.dart' as _i893;
 import 'package:shop_nike_app/repositories/posts_repository.dart' as _i399;
 import 'package:shop_nike_app/repositories/products_repository.dart' as _i616;
@@ -29,6 +31,9 @@ import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i468;
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
     as _i53;
+import 'package:shop_nike_app/screens/home/shop/bloc/favorite_products_storage.dart'
+    as _i249;
+import 'package:shop_nike_app/screens/home/shop/bloc/shop_bloc.dart' as _i711;
 import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
 import 'package:shop_nike_app/services/http/http_client.dart' as _i776;
 import 'package:shop_nike_app/services/http/index.dart' as _i892;
@@ -38,46 +43,20 @@ import 'package:shop_nike_app/services/message/implementation/toast_message_serv
 import 'package:shop_nike_app/services/message/index.dart' as _i301;
 
 extension GetItInjectableX on _i174.GetIt {
-  // initializes the registration of auth-scope dependencies inside of GetIt
-  _i174.GetIt initAuthScope({_i174.ScopeDisposeFunc? dispose}) {
-    return _i526.GetItHelper(this).initScope(
-      'auth',
-      dispose: dispose,
-      init: (_i526.GetItHelper gh) {
-        gh.singleton<_i301.MessageService>(() => _i1050.ToastMessageService());
-        gh.singleton<_i776.HttpClient>(
-          () => _i776.HttpClient(messageService: gh<_i301.MessageService>()),
-        );
-        gh.factory<_i454.OnboardingStateStorage>(
-          () => _i454.OnboardingStateStorage(gh<_i460.SharedPreferences>()),
-        );
-        gh.factory<_i380.AuthRepository>(
-          () => _i380.AuthRepository(gh<_i892.HttpClient>()),
-        );
-        gh.factory<_i447.UserRepository>(
-          () => _i447.UserRepository(gh<_i892.HttpClient>()),
-        );
-        gh.factory<_i1015.LoginFormBloc>(
-          () =>
-              _i1015.LoginFormBloc(authRepository: gh<_i380.AuthRepository>()),
-        );
-        gh.singleton<_i641.AuthBloc>(
-          () => _i641.AuthBloc(
-            authRepository: gh<_i893.AuthRepository>(),
-            userRepository: gh<_i893.UserRepository>(),
-            onboardingStorage: gh<_i454.OnboardingStateStorage>(),
-          ),
-        );
-      },
-    );
-  }
-
   // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i249.FavoriteProductsStorage>(
+      () => _i249.FavoriteProductsStorage(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i452.FavoriteProductsRepository>(
+      () => _i452.FavoriteProductsRepository(
+        favoriteProductsStorage: gh<_i249.FavoriteProductsStorage>(),
+      ),
+    );
     gh.factory<_i970.ChatsRepository>(
       () => _i970.ChatsRepository(gh<_i892.HttpClient>()),
     );
@@ -100,9 +79,49 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i468.ChatsBloc>(
       () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),
     );
+    gh.lazySingleton<_i711.ShopBloc>(
+      () => _i711.ShopBloc(
+        productsRepository: gh<_i893.ProductsRepository>(),
+        favoriteProductsRepository: gh<_i893.FavoriteProductsRepository>(),
+      ),
+    );
     gh.lazySingleton<_i53.PostsBloc>(
       () => _i53.PostsBloc(postsRepository: gh<_i893.PostsRepository>()),
     );
     return this;
+  }
+
+  // initializes the registration of auth-scope dependencies inside of GetIt
+  _i174.GetIt initAuthScope({_i174.ScopeDisposeFunc? dispose}) {
+    return _i526.GetItHelper(this).initScope(
+      'auth',
+      dispose: dispose,
+      init: (_i526.GetItHelper gh) {
+        gh.singleton<_i301.MessageService>(() => _i1050.ToastMessageService());
+        gh.factory<_i454.OnboardingStateStorage>(
+          () => _i454.OnboardingStateStorage(gh<_i460.SharedPreferences>()),
+        );
+        gh.singleton<_i776.HttpClient>(
+          () => _i776.HttpClient(messageService: gh<_i869.MessageService>()),
+        );
+        gh.factory<_i380.AuthRepository>(
+          () => _i380.AuthRepository(gh<_i892.HttpClient>()),
+        );
+        gh.factory<_i447.UserRepository>(
+          () => _i447.UserRepository(gh<_i892.HttpClient>()),
+        );
+        gh.factory<_i1015.LoginFormBloc>(
+          () =>
+              _i1015.LoginFormBloc(authRepository: gh<_i380.AuthRepository>()),
+        );
+        gh.singleton<_i641.AuthBloc>(
+          () => _i641.AuthBloc(
+            authRepository: gh<_i893.AuthRepository>(),
+            userRepository: gh<_i893.UserRepository>(),
+            onboardingStorage: gh<_i454.OnboardingStateStorage>(),
+          ),
+        );
+      },
+    );
   }
 }

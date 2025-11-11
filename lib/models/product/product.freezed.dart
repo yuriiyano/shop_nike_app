@@ -20,6 +20,8 @@ mixin _$Product {
   String get category;
   String get image;
   ProductRating get rating;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  bool get isFavorite;
 
   /// Create a copy of Product
   /// with the given fields replaced by the non-null parameter values.
@@ -44,7 +46,9 @@ mixin _$Product {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -58,11 +62,12 @@ mixin _$Product {
     category,
     image,
     rating,
+    isFavorite,
   );
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
+    return 'Product(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating, isFavorite: $isFavorite)';
   }
 }
 
@@ -79,6 +84,7 @@ abstract mixin class $ProductCopyWith<$Res> {
     String category,
     String image,
     ProductRating rating,
+    @JsonKey(includeFromJson: false, includeToJson: false) bool isFavorite,
   });
 
   $ProductRatingCopyWith<$Res> get rating;
@@ -103,6 +109,7 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
     Object? category = null,
     Object? image = null,
     Object? rating = null,
+    Object? isFavorite = null,
   }) {
     return _then(
       _self.copyWith(
@@ -134,6 +141,10 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
             ? _self.rating
             : rating // ignore: cast_nullable_to_non_nullable
                   as ProductRating,
+        isFavorite: null == isFavorite
+            ? _self.isFavorite
+            : isFavorite // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -160,6 +171,8 @@ class _Product implements Product {
     this.category = '',
     this.image = '',
     this.rating = const ProductRating(),
+    @JsonKey(includeFromJson: false, includeToJson: false)
+    this.isFavorite = false,
   });
   factory _Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
@@ -185,6 +198,9 @@ class _Product implements Product {
   @override
   @JsonKey()
   final ProductRating rating;
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final bool isFavorite;
 
   /// Create a copy of Product
   /// with the given fields replaced by the non-null parameter values.
@@ -212,7 +228,9 @@ class _Product implements Product {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -226,11 +244,12 @@ class _Product implements Product {
     category,
     image,
     rating,
+    isFavorite,
   );
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
+    return 'Product(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating, isFavorite: $isFavorite)';
   }
 }
 
@@ -248,6 +267,7 @@ abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
     String category,
     String image,
     ProductRating rating,
+    @JsonKey(includeFromJson: false, includeToJson: false) bool isFavorite,
   });
 
   @override
@@ -273,6 +293,7 @@ class __$ProductCopyWithImpl<$Res> implements _$ProductCopyWith<$Res> {
     Object? category = null,
     Object? image = null,
     Object? rating = null,
+    Object? isFavorite = null,
   }) {
     return _then(
       _Product(
@@ -304,6 +325,10 @@ class __$ProductCopyWithImpl<$Res> implements _$ProductCopyWith<$Res> {
             ? _self.rating
             : rating // ignore: cast_nullable_to_non_nullable
                   as ProductRating,
+        isFavorite: null == isFavorite
+            ? _self.isFavorite
+            : isFavorite // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }

@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       endDrawer: const AppDrawer(),
       routes: const [
         DashboardRoute(),
-        MessagesRoute(),
+        ShopRoute(),
         SettingsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
@@ -33,13 +33,13 @@ class HomeScreen extends StatelessWidget {
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: [
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.dashboard),
-                label: context.tr(LocaleKeys.dashboard),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.home_filled),
+                label: 'Home',
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.message),
-                label: context.tr(LocaleKeys.messages),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Shop',
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.settings),
