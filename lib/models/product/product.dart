@@ -13,6 +13,7 @@ sealed class Product with _$Product {
     @Default('') String category,
     @Default('') String image,
     @Default(ProductRating()) ProductRating rating,
+    @Default(false) @JsonKey(includeFromJson: false, includeToJson: false) bool isFavorite,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>

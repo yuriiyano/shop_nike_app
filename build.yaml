@@ -50,6 +50,7 @@ targets:
             - lib/**_client.dart
             - lib/blocs/**.dart
             - lib/services/**.dart
+            - lib/**_storage.dart
 
       injectable_generator:injectable_config_builder:
         enabled: true

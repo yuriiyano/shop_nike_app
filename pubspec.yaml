@@ -72,6 +72,7 @@ dependencies:
 
   #others
   upgrader: ^11.5.0
+  collection: ^1.19.1
 
 dev_dependencies:
   #testing
@@ -106,6 +107,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/dashboard/
+    - assets/images/shop/
     - resources/langs/
   fonts:
     - family: Poppins

@@ -13,10 +13,10 @@ class ProductsRepository {
     httpClient.registerType<Product>(Product.fromJson);
   }
 
-  Future<List<Product>> getProducts({required int limit}) {
+  Future<List<Product>> getProducts({int? limit}) {
     return httpClient.get<List<Product>>(
       '/products',
-      queryParameters: {'limit': max(1, limit)},
+      queryParameters: limit != null ? {'limit': max(1, limit)} : null,
     );
   }
 }

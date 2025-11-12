@@ -31,7 +31,7 @@ class ProductCard extends StatelessWidget {
                 imageUrl: product.image,
                 width: width * 0.8,
                 height: width * 0.8,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
           ),
@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            'US\$${product.price.toString().replaceFirst('.', '`')}',
+            '\$${product.price}',
             style: const TextStyle(
               fontFamily: FontFamily.heebo,
               fontWeight: FontWeight.w500,

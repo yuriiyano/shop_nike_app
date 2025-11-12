@@ -107,10 +107,10 @@ class DashboardScreen extends StatelessWidget implements AutoRouteWrapper {
                         return const Center(child: CircularProgressIndicator());
                       case NetworkStatus.success:
                         return LayoutBuilder(
-                          builder: (context, constaint) {
+                          builder: (context, constraints) {
                             final cardWidth =
-                                constaint.maxWidth - horizontalPadding * 2 - 10;
-                            final carouselHeight = constaint.maxWidth + 40;
+                                constraints.maxWidth - horizontalPadding * 2 - 10;
+                            final carouselHeight = constraints.maxWidth + 40;
 
                             return ProductsCarousel(
                               products: state.data,

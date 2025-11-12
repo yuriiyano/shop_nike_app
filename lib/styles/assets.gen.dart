@@ -34,6 +34,9 @@ class $AssetsImagesGen {
   AssetGenImage get onboardingBackground =>
       const AssetGenImage('assets/images/onboarding-background.png');
 
+  /// Directory path: assets/images/shop
+  $AssetsImagesShopGen get shop => const $AssetsImagesShopGen();
+
   /// List of all assets
   List<dynamic> get values => [logo, onboardingBackground];
 }
@@ -60,6 +63,37 @@ class $AssetsImagesDashboardGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [dashboardMain];
+}
+
+class $AssetsImagesShopGen {
+  const $AssetsImagesShopGen();
+
+  /// File path: assets/images/shop/favorite.svg
+  SvgGenImage get favorite =>
+      const SvgGenImage('assets/images/shop/favorite.svg');
+
+  /// File path: assets/images/shop/favorite_filled.png
+  AssetGenImage get favoriteFilled =>
+      const AssetGenImage('assets/images/shop/favorite_filled.png');
+
+  /// File path: assets/images/shop/favorite_outlined.png
+  AssetGenImage get favoriteOutlined =>
+      const AssetGenImage('assets/images/shop/favorite_outlined.png');
+
+  /// File path: assets/images/shop/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/images/shop/filter.svg');
+
+  /// File path: assets/images/shop/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/images/shop/search.svg');
+
+  /// List of all assets
+  List<dynamic> get values => [
+    favorite,
+    favoriteFilled,
+    favoriteOutlined,
+    filter,
+    search,
+  ];
 }
 
 class Assets {
