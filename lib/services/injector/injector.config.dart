@@ -17,8 +17,10 @@ import 'package:shop_nike_app/blocs/auth/onboarding_state_storage.dart'
     as _i454;
 import 'package:shop_nike_app/repositories/auth_repository.dart' as _i380;
 import 'package:shop_nike_app/repositories/chats_repository.dart' as _i970;
-import 'package:shop_nike_app/repositories/favorite_products_repository.dart'
-    as _i452;
+import 'package:shop_nike_app/repositories/favorite_products/favorite_products_repository.dart'
+    as _i990;
+import 'package:shop_nike_app/repositories/favorite_products/favorite_products_storage.dart'
+    as _i552;
 import 'package:shop_nike_app/repositories/index.dart' as _i893;
 import 'package:shop_nike_app/repositories/posts_repository.dart' as _i399;
 import 'package:shop_nike_app/repositories/products_repository.dart' as _i616;
@@ -31,8 +33,6 @@ import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i468;
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
     as _i53;
-import 'package:shop_nike_app/screens/home/shop/bloc/favorite_products_storage.dart'
-    as _i249;
 import 'package:shop_nike_app/screens/home/shop/bloc/shop_bloc.dart' as _i711;
 import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
 import 'package:shop_nike_app/services/http/http_client.dart' as _i776;
@@ -49,12 +49,12 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i249.FavoriteProductsStorage>(
-      () => _i249.FavoriteProductsStorage(gh<_i460.SharedPreferences>()),
+    gh.factory<_i552.FavoriteProductsStorage>(
+      () => _i552.FavoriteProductsStorage(gh<_i460.SharedPreferences>()),
     );
-    gh.factory<_i452.FavoriteProductsRepository>(
-      () => _i452.FavoriteProductsRepository(
-        favoriteProductsStorage: gh<_i249.FavoriteProductsStorage>(),
+    gh.factory<_i990.FavoriteProductsRepository>(
+      () => _i990.FavoriteProductsRepository(
+        favoriteProductsStorage: gh<_i552.FavoriteProductsStorage>(),
       ),
     );
     gh.factory<_i970.ChatsRepository>(
@@ -76,14 +76,14 @@ extension GetItInjectableX on _i174.GetIt {
         productsRepository: gh<_i893.ProductsRepository>(),
       ),
     );
-    gh.lazySingleton<_i468.ChatsBloc>(
-      () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),
-    );
     gh.lazySingleton<_i711.ShopBloc>(
       () => _i711.ShopBloc(
         productsRepository: gh<_i893.ProductsRepository>(),
         favoriteProductsRepository: gh<_i893.FavoriteProductsRepository>(),
       ),
+    );
+    gh.lazySingleton<_i468.ChatsBloc>(
+      () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),
     );
     gh.lazySingleton<_i53.PostsBloc>(
       () => _i53.PostsBloc(postsRepository: gh<_i893.PostsRepository>()),

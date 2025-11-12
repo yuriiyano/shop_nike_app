@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:collection/collection.dart';
 
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/repositories/index.dart';
@@ -23,14 +24,16 @@ class ShopBloc extends NetworkListBloc<Product, ShopState> {
 
   @override
   Future<List<Product>> onLoadAsync() async {
-    final products = await productsRepository.getProducts();
-    final favoriteProductIds = await favoriteProductsRepository
-        .getFavoriteProductsIds();
+    final (products, favoriteProductIds) = await (
+      productsRepository.getProducts(),
+      favoriteProductsRepository.getFavoriteProductsIds(),
+    ).wait;
+
     final updatedProducts = products
         .map(
-          (e) => favoriteProductIds.contains(e.id.toString())
-              ? e.copyWith(isFavorite: true)
-              : e,
+          (product) => favoriteProductIds.contains(product.id.toString())
+              ? product.copyWith(isFavorite: true)
+              : product,
         )
         .toList();
 
@@ -61,7 +64,7 @@ class ShopBloc extends NetworkListBloc<Product, ShopState> {
   }
 
   @override
-  bool equals(Product item1, Product item) {
-    return item1.id == item.id;
+  bool equals(Product item1, Product item2) {
+    return item1.id == item2.id;
   }
 }

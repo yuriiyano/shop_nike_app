@@ -8,20 +8,13 @@ import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
 import 'package:shop_nike_app/blocs/index.dart';
 
-class ProductGridCard extends StatefulWidget {
+class ProductGridCard extends StatelessWidget {
   const ProductGridCard({super.key, required this.product});
 
   final Product product;
 
   @override
-  State<ProductGridCard> createState() => _ProductGridCardState();
-}
-
-class _ProductGridCardState extends State<ProductGridCard> {
-  @override
   Widget build(BuildContext context) {
-    final product = widget.product;
-
     return LayoutBuilder(
       builder: (context, constraints) {
         final imageSize = constraints.maxWidth;

@@ -13,7 +13,7 @@ class ProductsRepository {
     httpClient.registerType<Product>(Product.fromJson);
   }
 
-  Future<List<Product>> getProducts({int? limit}) async {
+  Future<List<Product>> getProducts({int? limit}) {
     return httpClient.get<List<Product>>(
       '/products',
       queryParameters: limit != null ? {'limit': max(1, limit)} : null,

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 
-import 'package:shop_nike_app/screens/home/shop/bloc/favorite_products_storage.dart';
+import 'favorite_products_storage.dart';
 
 @Injectable()
 class FavoriteProductsRepository {
@@ -8,11 +8,11 @@ class FavoriteProductsRepository {
 
   const FavoriteProductsRepository({required this.favoriteProductsStorage});
 
-  Future<bool> toggleFavoriteProduct({required String id}) {
-    return favoriteProductsStorage.toggleFavoriteProduct(id: id);
-  }
-
   Future<List<String>> getFavoriteProductsIds() {
     return favoriteProductsStorage.getFavoriteProductsIds();
+  }
+
+  Future<bool> toggleFavoriteProduct({required String id}) {
+    return favoriteProductsStorage.toggleFavoriteProduct(id: id);
   }
 }

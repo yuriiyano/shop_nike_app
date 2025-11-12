@@ -8,7 +8,7 @@ class CustomOutlinedButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.icon,
-    this.iconSufixPosition = true,
+    this.iconSuffixPosition = true,
     this.textIconGap = 10,
     this.width,
     this.fontFamily = FontFamily.heebo,
@@ -25,7 +25,7 @@ class CustomOutlinedButton extends StatelessWidget {
   final String text;
   final void Function() onPressed;
   final Widget? icon;
-  final bool iconSufixPosition;
+  final bool iconSuffixPosition;
   final double textIconGap;
   final double? width;
   final String fontFamily;
@@ -61,12 +61,12 @@ class CustomOutlinedButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null && !iconSufixPosition) ...[
+            if (icon != null && !iconSuffixPosition) ...[
               icon!,
               SizedBox(width: textIconGap),
             ],
             Text(text),
-            if (icon != null && iconSufixPosition) ...[
+            if (icon != null && iconSuffixPosition) ...[
               SizedBox(width: textIconGap),
               icon!,
             ],

@@ -14,10 +14,9 @@ class ShopState extends NetworkListState<Product> {
     );
   }
 
-  bool isProductFavorite({required int productId}) => data
-      .firstWhere((e) => e.id == productId, orElse: () => const Product())
-      .isFavorite;
+  bool isProductFavorite({required int productId}) =>
+       data.firstWhereOrNull((product) => product.id == productId)?.isFavorite ?? false;
 
   List<Product> filterProductsByCategory({required String category}) =>
-      data.where((e) => category == e.category).toList();
+      data.where((product) => category == product.category).toList();
 }

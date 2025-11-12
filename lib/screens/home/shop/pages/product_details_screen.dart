@@ -12,19 +12,13 @@ import 'package:shop_nike_app/widgets/index.dart';
 import 'package:shop_nike_app/screens/home/dashboard/widgets/index.dart';
 
 @RoutePage()
-class ProductDetailsScreen extends StatefulWidget {
+class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.product});
 
   final Product product;
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
-}
-
-class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  @override
   Widget build(BuildContext context) {
-    final product = widget.product;
     final deviceWidth = MediaQuery.sizeOf(context).width;
     final imageHeight = deviceWidth * 1.2;
     const double horizontalPadding = 24;
@@ -205,12 +199,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             final filteredProducts = state
                                 .filterProductsByCategory(
                                   category: product.category,
-                                );
+                                )
+                                .where((e) => e.id != product.id)
+                                .toList();
 
                             return ProductsCarousel(
-                              products: filteredProducts
-                                  .where((e) => e.id != product.id)
-                                  .toList(),
+                              products: filteredProducts,
                               carouselHeight: carouselHeight,
                               carouselHorizontalPadding: horizontalPadding,
                               cardWidth: cardWidth,
