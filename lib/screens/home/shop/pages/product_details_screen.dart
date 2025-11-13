@@ -130,8 +130,9 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     BlocSelector<ShopBloc, ShopState, bool>(
-                      selector: (state) =>
-                          state.isProductFavorite(productId: product.id),
+                      selector: (state) => context
+                          .read<ShopBloc>()
+                          .isProductFavorite(productId: product.id),
                       builder: (context, isFavorite) {
                         return CustomOutlinedButton(
                           text: 'Favourite',
@@ -196,7 +197,8 @@ class ProductDetailsScreen extends StatelessWidget {
                             final cardWidth = constraints.maxWidth * 0.7;
                             final carouselHeight =
                                 constraints.maxWidth * 0.7 + 100;
-                            final filteredProducts = state
+                            final filteredProducts = context
+                                .read<ShopBloc>()
                                 .filterProductsByCategory(
                                   category: product.category,
                                 )
