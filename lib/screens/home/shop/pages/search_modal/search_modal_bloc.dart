@@ -6,7 +6,7 @@ class SearchModalBloc extends FormBloc<String, String> {
   late final TextFieldBloc searchQuery;
   late final ListFieldBloc<String> autocomplete;
 
-  SearchModalBloc() : super(customSubmit: false) {
+  SearchModalBloc() : super() {
     searchQuery = TextFieldBloc(
       required: true,
     );
@@ -31,14 +31,14 @@ class SearchModalBloc extends FormBloc<String, String> {
     ]);
 
     addSubscription(
-      searchQuery.valueStream.listen((value) {
-        final autocompleteToDisplay = autocomplete.initialValue
+      searchQuery.valueStream.listen((query) {
+        final searchedOptions = autocomplete.initialValue
             .where(
-              (data) =>
-                  data.toUpperCase().contains((value ?? '').toUpperCase()),
+              (option) =>
+                  option.toUpperCase().contains((query ?? '').toUpperCase()),
             )
             .toList();
-        autocomplete.changeValue(autocompleteToDisplay);
+        autocomplete.changeValue(searchedOptions);
       }),
     );
   }

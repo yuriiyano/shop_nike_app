@@ -14,8 +14,8 @@ class TextInput extends StatefulWidget {
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
 
-  final void Function(String)? onChanged;
-  final void Function(String)? onSubmitted;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   final String? errorText;
   final String? helperText;
@@ -49,8 +49,8 @@ class _TextInputState extends State<TextInput> {
 
   @override
   void initState() {
-    _isObscureTextDynamic = widget.isObscureText;
     super.initState();
+    _isObscureTextDynamic = widget.isObscureText;
   }
 
   @override

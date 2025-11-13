@@ -21,9 +21,8 @@ class _SearchTextInputFormBuilderState
 
   @override
   void initState() {
-    _controller = TextEditingController(text: widget.fieldBloc.value);
-
     super.initState();
+    _controller = TextEditingController(text: widget.fieldBloc.value);
   }
 
   @override
@@ -31,7 +30,6 @@ class _SearchTextInputFormBuilderState
     return BlocBuilder<TextFieldBloc, TextFieldBlocState>(
       bloc: widget.fieldBloc,
       builder: (context, state) {
-        
         return SearchTextInput(
           controller: _controller,
           hintText: 'Enter product name',
@@ -46,7 +44,6 @@ class _SearchTextInputFormBuilderState
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
   }
 }

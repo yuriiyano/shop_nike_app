@@ -12,7 +12,7 @@ class SearchTextInput extends StatelessWidget {
 
   final TextEditingController controller;
   final String hintText;
-  final void Function(String) onChanged;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {

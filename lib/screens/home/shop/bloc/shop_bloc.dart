@@ -23,6 +23,16 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
     on<ShopEventToggleFavorite>(_toggleFavoriteProduct);
   }
 
+    bool isProductFavorite({required int productId}) =>
+      state.data
+          .firstWhereOrNull((product) => product.id == productId)
+          ?.isFavorite ??
+      false;
+
+  List<Product> filterProductsByCategory({required String category}) =>
+      state.data.where((product) => category == product.category).toList();
+
+
   @override
   Future<List<Product>> onLoadAsync() async {
     final (products, favoriteProductIds) = await (
@@ -67,15 +77,6 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
       );
     }
   }
-
-  bool isProductFavorite({required int productId}) =>
-      state.data
-          .firstWhereOrNull((product) => product.id == productId)
-          ?.isFavorite ??
-      false;
-
-  List<Product> filterProductsByCategory({required String category}) =>
-      state.data.where((product) => category == product.category).toList();
 
   @override
   ShopState onStateChanged(DataChangeReason reason, ShopState state) {

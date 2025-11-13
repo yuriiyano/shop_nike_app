@@ -59,6 +59,7 @@ class _LoginFormState extends State<LoginForm> {
           fieldFocusNode: _passwordFocusNode,
           onSubmit: () {
             _passwordFocusNode.unfocus();
+            formBloc.submit();
           },
         ),
         const SizedBox(height: 36),

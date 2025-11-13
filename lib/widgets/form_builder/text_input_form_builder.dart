@@ -38,8 +38,8 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
 
   @override
   void initState() {
-    _controller = TextEditingController(text: widget.fieldBloc.value);
     super.initState();
+    _controller = TextEditingController(text: widget.fieldBloc.value);
   }
 
   @override
@@ -92,7 +92,6 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
   }
 }
