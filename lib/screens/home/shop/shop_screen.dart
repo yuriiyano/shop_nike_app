@@ -40,7 +40,15 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
             icon: Assets.images.shop.filter.svg(width: 24),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final query = await context.router.push<String?>(
+                const SearchModalRoute(),
+              );
+
+              if (!context.mounted || query == null) return;
+
+              context.read<ShopBloc>().search(query);
+            },
             icon: Assets.images.shop.search.svg(width: 24),
           ),
         ],
@@ -54,7 +62,7 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
               case NetworkStatus.loading:
                 return const Center(child: CircularProgressIndicator());
               case NetworkStatus.success:
-                final products = state.data;
+                final products = state.visibleData;
 
                 return GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -66,7 +74,7 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     final product = products[index];
-                    
+
                     return InkWell(
                       onTap: () => context.router.push(
                         ProductDetailsRoute(product: product),

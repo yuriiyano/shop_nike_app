@@ -34,6 +34,8 @@ import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
     as _i53;
 import 'package:shop_nike_app/screens/home/shop/bloc/shop_bloc.dart' as _i711;
+import 'package:shop_nike_app/screens/home/shop/pages/search_modal/search_modal_bloc.dart'
+    as _i720;
 import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
 import 'package:shop_nike_app/services/http/http_client.dart' as _i776;
 import 'package:shop_nike_app/services/http/index.dart' as _i892;
@@ -49,6 +51,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i720.SearchModalBloc>(() => _i720.SearchModalBloc());
     gh.factory<_i552.FavoriteProductsStorage>(
       () => _i552.FavoriteProductsStorage(gh<_i460.SharedPreferences>()),
     );

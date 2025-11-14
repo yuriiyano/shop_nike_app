@@ -19,6 +19,8 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shopBloc = context.read<ShopBloc>();
+
     final deviceWidth = MediaQuery.sizeOf(context).width;
     final imageHeight = deviceWidth * 1.2;
     const double horizontalPadding = 24;
@@ -131,7 +133,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                     BlocSelector<ShopBloc, ShopState, bool>(
                       selector: (state) =>
-                          state.isProductFavorite(productId: product.id),
+                          shopBloc.isProductFavorite(productId: product.id),
                       builder: (context, isFavorite) {
                         return CustomOutlinedButton(
                           text: 'Favourite',
@@ -146,7 +148,7 @@ class ProductDetailsScreen extends StatelessWidget {
                                   height: 20,
                                 ),
                           onPressed: () {
-                            context.read<ShopBloc>().add(
+                            shopBloc.add(
                               ShopEventToggleFavorite(productId: product.id),
                             );
                           },
@@ -196,7 +198,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             final cardWidth = constraints.maxWidth * 0.7;
                             final carouselHeight =
                                 constraints.maxWidth * 0.7 + 100;
-                            final filteredProducts = state
+                            final filteredProducts = shopBloc
                                 .filterProductsByCategory(
                                   category: product.category,
                                 )
