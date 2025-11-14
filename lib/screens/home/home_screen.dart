@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_nike_app/localization/index.dart';
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/widgets/index.dart';
+import 'package:shop_nike_app/styles/index.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
       routes: const [
         DashboardRoute(),
         ShopRoute(),
+        FavouritesRoute(),
         SettingsRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
@@ -40,6 +42,25 @@ class HomeScreen extends StatelessWidget {
               const BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Shop',
+              ),
+              BottomNavigationBarItem(
+                icon: Assets.images.shop.favorite.svg(
+                  width: 18,
+                  height: 18,
+                  colorFilter: const ColorFilter.mode(
+                    Color.fromARGB(255, 118, 118, 118),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                activeIcon: Assets.images.shop.favorite.svg(
+                  width: 18,
+                  height: 18,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                label: 'Favourites',
               ),
               BottomNavigationBarItem(
                 icon: const Icon(Icons.settings),

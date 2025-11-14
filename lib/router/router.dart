@@ -26,6 +26,7 @@ class AppRouter extends RootStackRouter {
               children: [
                 AutoRoute(page: DashboardRoute.page),
                 AutoRoute(page: ShopRoute.page),
+                AutoRoute(page: FavouritesRoute.page),
                 AutoRoute(
                   page: MessagesRoute.page,
                   children: [

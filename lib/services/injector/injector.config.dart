@@ -29,6 +29,8 @@ import 'package:shop_nike_app/screens/home/dashboard/dashboard_bloc.dart'
     as _i260;
 import 'package:shop_nike_app/screens/home/dashboard1_test/bloc/dashboard1_bloc.dart'
     as _i392;
+import 'package:shop_nike_app/screens/home/favourites/favourites_bloc.dart'
+    as _i403;
 import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
     as _i468;
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
@@ -81,6 +83,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i711.ShopBloc>(
       () => _i711.ShopBloc(
+        productsRepository: gh<_i893.ProductsRepository>(),
+        favoriteProductsRepository: gh<_i893.FavoriteProductsRepository>(),
+      ),
+    );
+    gh.lazySingleton<_i403.FavouritesBloc>(
+      () => _i403.FavouritesBloc(
         productsRepository: gh<_i893.ProductsRepository>(),
         favoriteProductsRepository: gh<_i893.FavoriteProductsRepository>(),
       ),

@@ -135,6 +135,8 @@ class ProductDetailsScreen extends StatelessWidget {
                       selector: (state) =>
                           shopBloc.isProductFavorite(productId: product.id),
                       builder: (context, isFavorite) {
+                        // final isFavoriteFinal =
+                        //     isFavorite || product.isFavorite;
                         return CustomOutlinedButton(
                           text: 'Favourite',
                           icon: isFavorite
