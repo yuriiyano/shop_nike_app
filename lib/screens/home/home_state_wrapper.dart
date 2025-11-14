@@ -14,18 +14,11 @@ class HomeStateWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => getIt<DashboardBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<ShopBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<ChatsBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => getIt<PostsBloc>(),
-        ),
+        BlocProvider(create: (context) => getIt<DashboardBloc>()),
+        BlocProvider(create: (context) => getIt<ShopBloc>()),
+        BlocProvider(create: (context) => getIt<ChatsBloc>()),
+        BlocProvider(create: (context) => getIt<PostsBloc>()),
+        BlocProvider(create: (context) => getIt<FavouritesBloc>()),
       ],
       child: child,
     );
