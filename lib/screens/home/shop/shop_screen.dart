@@ -6,6 +6,7 @@ import 'package:shop_nike_app/blocs/index.dart';
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
+import 'package:shop_nike_app/models/filter/product_filter_model.dart';
 import 'widgets/index.dart';
 
 @RoutePage()
@@ -21,6 +22,7 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
+    final shopBloc = context.read<ShopBloc>();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -36,7 +38,14 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              final productFilterModel = await context.router
+                  .push<ProductFilterModel?>(
+                     FilterModalRoute(initialFilter: shopBloc.state.filter),
+                  );
+              if (productFilterModel == null) return;
+              shopBloc.filter(productFilterModel);
+            },
             icon: Assets.images.shop.filter.svg(width: 24),
           ),
           IconButton(
@@ -47,14 +56,14 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
 
               if (!context.mounted || query == null) return;
 
-              context.read<ShopBloc>().search(query);
+              shopBloc.search(query);
             },
             icon: Assets.images.shop.search.svg(width: 24),
           ),
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: context.read<ShopBloc>().loadAsyncFuture,
+        onRefresh: shopBloc.loadAsyncFuture,
         child: BlocBuilder<ShopBloc, ShopState>(
           builder: (context, state) {
             switch (state.status) {

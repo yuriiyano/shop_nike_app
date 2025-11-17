@@ -73,6 +73,7 @@ dependencies:
   #others
   upgrader: ^11.5.0
   collection: ^1.19.1
+  rxdart: ^0.28.0
 
 dev_dependencies:
   #testing

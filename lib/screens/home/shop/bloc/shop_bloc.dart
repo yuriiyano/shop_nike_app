@@ -1,18 +1,20 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:collection/collection.dart';
+import 'package:darq/darq.dart';
 
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/repositories/index.dart';
+import 'package:shop_nike_app/models/filter/product_filter_model.dart';
 
 part 'shop_event.dart';
-
-typedef ShopState = NetworkSearchableListState<Product>;
+part 'shop_state.dart';
 
 @lazySingleton
-class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
+class ShopBloc
+    extends NetworkFilterableListBloc<Product, ProductFilterModel, ShopState> {
   final ProductsRepository productsRepository;
   final FavoriteProductsRepository favoriteProductsRepository;
 
@@ -23,7 +25,7 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
     on<ShopEventToggleFavorite>(_toggleFavoriteProduct);
   }
 
-    bool isProductFavorite({required int productId}) =>
+  bool isProductFavorite({required int productId}) =>
       state.data
           .firstWhereOrNull((product) => product.id == productId)
           ?.isFavorite ??
@@ -31,7 +33,6 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
 
   List<Product> filterProductsByCategory({required String category}) =>
       state.data.where((product) => category == product.category).toList();
-
 
   @override
   Future<List<Product>> onLoadAsync() async {
@@ -56,7 +57,7 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
     Emitter<ShopState> emit,
   ) async {
     final productId = event.productId;
-    
+
     final toggledWithSuccess = await favoriteProductsRepository
         .toggleFavoriteProduct(id: productId.toString());
 
@@ -84,12 +85,34 @@ class ShopBloc extends NetworkSearchableListBloc<Product, ShopState> {
     final query = state.query;
 
     if (query?.isNotEmpty ?? false) {
-      visibleData = visibleData
-          .where(
-            (product) =>
-                product.title.toUpperCase().contains(query!.toUpperCase()),
-          )
-          .toList();
+      visibleData = state.searchByQuery(
+        products: visibleData,
+        query: query,
+      );
+    }
+
+    if (state.filter != null) {
+      if (state.filter!.productSortOrderType != null &&
+          visibleData.isNotEmpty) {
+        visibleData = state.sortProducts(
+          products: visibleData,
+          sortType: state.filter!.productSortOrderType,
+        );
+      }
+
+      if (state.filter!.priceRange.isNotEmpty && visibleData.isNotEmpty) {
+        visibleData = state.filterByPrice(
+          products: visibleData,
+          priceRanges: state.filter!.priceRange,
+        );
+      }
+
+      if (state.filter!.categories.isNotEmpty && visibleData.isNotEmpty) {
+        visibleData = state.filterByCategories(
+          products: visibleData,
+          categories: state.filter!.categories,
+        );
+      }
     }
 
     return state.copyWith(visibleData: visibleData);
