@@ -15,6 +15,7 @@ class TextInputFormBuilder extends StatefulWidget {
     this.hintText,
     this.isObscureText = false,
     this.textInputAction,
+    this.textInputType,
     this.fieldFocusNode,
     this.nextFieldFocusNode,
     this.onSubmit,
@@ -25,6 +26,7 @@ class TextInputFormBuilder extends StatefulWidget {
   final String? hintText;
   final bool isObscureText;
   final TextInputAction? textInputAction;
+  final TextInputType? textInputType;
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
   final VoidCallback? onSubmit;
@@ -81,6 +83,7 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
             isObscureText: widget.isObscureText,
             hintText: widget.hintText,
             textInputAction: widget.textInputAction,
+            textInputType: widget.textInputType,
             fieldFocusNode: widget.fieldFocusNode,
             nextFieldFocusNode: widget.nextFieldFocusNode,
             onChanged: (value) => widget.fieldBloc.changeValue(value),

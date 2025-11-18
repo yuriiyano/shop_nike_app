@@ -19,6 +19,7 @@ class HomeStateWrapper extends StatelessWidget {
         BlocProvider(create: (context) => getIt<ChatsBloc>()),
         BlocProvider(create: (context) => getIt<PostsBloc>()),
         BlocProvider(create: (context) => getIt<FavouritesBloc>()),
+        BlocProvider(create: (context) => getIt<CategoriesBloc>()),
       ],
       child: child,
     );

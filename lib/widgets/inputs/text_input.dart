@@ -11,6 +11,7 @@ class TextInput extends StatefulWidget {
     this.hintText,
     this.autocorrect = false,
     this.textInputAction,
+    this.textInputType,
     this.fieldFocusNode,
     this.nextFieldFocusNode,
     this.onChanged,
@@ -28,6 +29,7 @@ class TextInput extends StatefulWidget {
   final String? hintText;
   final bool autocorrect;
   final TextInputAction? textInputAction;
+  final TextInputType? textInputType;
 
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
@@ -76,6 +78,7 @@ class _TextInputState extends State<TextInput> {
           obscureText: _isObscureTextDynamic,
           autocorrect: widget.autocorrect,
           textInputAction: widget.textInputAction,
+          keyboardType: widget.textInputType,
           focusNode: widget.fieldFocusNode,
           onChanged: widget.onChanged,
           onSubmitted: widget.onSubmitted,
