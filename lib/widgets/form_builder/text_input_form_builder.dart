@@ -43,6 +43,12 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<TextFieldBloc, TextFieldBlocState>(
       bloc: widget.fieldBloc,
@@ -87,11 +93,5 @@ class _TextInputFormBuilderState extends State<TextInputFormBuilder> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

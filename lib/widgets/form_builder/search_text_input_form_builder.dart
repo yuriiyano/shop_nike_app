@@ -26,6 +26,12 @@ class _SearchTextInputFormBuilderState
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<TextFieldBloc, TextFieldBlocState>(
       bloc: widget.fieldBloc,
@@ -39,11 +45,5 @@ class _SearchTextInputFormBuilderState
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

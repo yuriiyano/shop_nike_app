@@ -15,7 +15,9 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'package:shop_nike_app/blocs/auth/auth_bloc.dart' as _i641;
 import 'package:shop_nike_app/blocs/auth/onboarding_state_storage.dart'
     as _i454;
+import 'package:shop_nike_app/models/filter/product_filter_model.dart' as _i78;
 import 'package:shop_nike_app/repositories/auth_repository.dart' as _i380;
+import 'package:shop_nike_app/repositories/categories_repository.dart' as _i802;
 import 'package:shop_nike_app/repositories/chats_repository.dart' as _i970;
 import 'package:shop_nike_app/repositories/favorite_products/favorite_products_repository.dart'
     as _i990;
@@ -36,6 +38,8 @@ import 'package:shop_nike_app/screens/home/messages/chats/bloc/chats_bloc.dart'
 import 'package:shop_nike_app/screens/home/messages/posts/posts_bloc.dart'
     as _i53;
 import 'package:shop_nike_app/screens/home/shop/bloc/shop_bloc.dart' as _i711;
+import 'package:shop_nike_app/screens/home/shop/pages/filter_modal/filter_modal_bloc.dart'
+    as _i735;
 import 'package:shop_nike_app/screens/home/shop/pages/search_modal/search_modal_bloc.dart'
     as _i720;
 import 'package:shop_nike_app/screens/login/login_form_bloc.dart' as _i1015;
@@ -62,6 +66,9 @@ extension GetItInjectableX on _i174.GetIt {
         favoriteProductsStorage: gh<_i552.FavoriteProductsStorage>(),
       ),
     );
+    gh.factory<_i802.CategoriesRepository>(
+      () => _i802.CategoriesRepository(httpClient: gh<_i869.HttpClient>()),
+    );
     gh.factory<_i970.ChatsRepository>(
       () => _i970.ChatsRepository(gh<_i892.HttpClient>()),
     );
@@ -70,6 +77,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i616.ProductsRepository>(
       () => _i616.ProductsRepository(gh<_i869.HttpClient>()),
+    );
+    gh.factoryParam<_i735.FilterModalBloc, _i78.ProductFilterModel?, dynamic>(
+      (initialFilter, _) => _i735.FilterModalBloc(
+        categoriesRepository: gh<_i893.CategoriesRepository>(),
+        initialFilter: initialFilter,
+      ),
     );
     gh.lazySingleton<_i260.DashboardBloc>(
       () => _i260.DashboardBloc(
