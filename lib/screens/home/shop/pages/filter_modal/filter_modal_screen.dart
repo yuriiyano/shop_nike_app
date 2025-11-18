@@ -8,15 +8,15 @@ import 'package:shop_nike_app/services/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
 import 'package:shop_nike_app/widgets/buttons/index.dart';
 import 'package:shop_nike_app/widgets/form_builder/index.dart';
-import 'package:shop_nike_app/models/filter/product_filter_model.dart';
+import 'package:shop_nike_app/models/index.dart';
 import 'filter_modal_bloc.dart';
 import 'widgets/index.dart';
 
 @RoutePage()
 class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
-  final ProductFilterModel? initialFilter;
-
   const FilterModalScreen({super.key, required this.initialFilter});
+
+  final ProductFilterModel? initialFilter;
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -81,7 +81,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                       name: 'Sort By',
                       child: RadioSelectFormBuilder<ProductSortOrderType>(
                         fieldBloc: formBloc.productSort,
-                        optionLabel: (ProductSortOrderType orderType) {
+                        optionLabel: (orderType) {
                           return orderType.label;
                         },
                       ),
@@ -94,7 +94,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                       name: 'Shop By Price',
                       child: MultiSelectFormBuilder<PriceRange>(
                         fieldBloc: formBloc.priceRanges,
-                        optionLabel: (PriceRange priceRange) {
+                        optionLabel: (priceRange) {
                           return priceRange.label;
                         },
                       ),
@@ -107,7 +107,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                       name: 'Shop By Categoty',
                       child: MultiSelectFormBuilder<String>(
                         fieldBloc: formBloc.categories,
-                        optionLabel: (String category) {
+                        optionLabel: (category) {
                           return category;
                         },
                       ),
@@ -137,7 +137,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                             Expanded(
                               child: CustomOutlinedButton(
                                 text: 'Reset',
-                                onPressed: formBloc.reset,
+                                onPressed: formBloc.clear,
                                 width: double.infinity,
                                 textColor: Colors.black,
                                 backgroundColor: Colors.white,
@@ -154,9 +154,11 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                               child: StreamBuilder(
                                 stream: formBloc.selectedFiltersCountStream,
                                 builder: (context, snapshot) {
+                                  final appliedFiltersNumber =
+                                      (snapshot.data ?? []).sum;
                                   return CustomOutlinedButton(
                                     text:
-                                        'Apply (${(snapshot.data ?? []).sum})',
+                                        'Apply ${appliedFiltersNumber > 0 ? '($appliedFiltersNumber)' : ''}',
                                     onPressed: formBloc.submit,
                                     width: double.infinity,
                                     backgroundColor: Colors.black,

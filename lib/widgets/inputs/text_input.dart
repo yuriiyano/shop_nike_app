@@ -3,6 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:shop_nike_app/styles/index.dart';
 
 class TextInput extends StatefulWidget {
+  const TextInput({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.isObscureText,
+    this.hintText,
+    this.autocorrect = false,
+    this.textInputAction,
+    this.fieldFocusNode,
+    this.nextFieldFocusNode,
+    this.onChanged,
+    this.onSubmitted,
+    this.errorText,
+    this.helperText,
+    this.errorMaxLines = 1,
+    this.helperMaxLines = 1,
+  });
+
   final TextEditingController controller;
 
   final String label;
@@ -21,24 +39,6 @@ class TextInput extends StatefulWidget {
   final String? helperText;
   final int errorMaxLines;
   final int helperMaxLines;
-
-  const TextInput({
-    super.key,
-    required this.controller,
-    required this.label,
-    required this.isObscureText,
-    this.hintText,
-    this.autocorrect = false,
-    this.textInputAction,
-    this.fieldFocusNode,
-    this.nextFieldFocusNode,
-    this.onChanged,
-    this.onSubmitted,
-    this.errorText,
-    this.helperText,
-    this.errorMaxLines = 1,
-    this.helperMaxLines = 1,
-  });
 
   @override
   State<TextInput> createState() => _TextInputState();

@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:shop_nike_app/repositories/index.dart';
-import 'package:shop_nike_app/models/filter/product_filter_model.dart';
+import 'package:shop_nike_app/models/index.dart';
 
 @Injectable()
 class FilterModalBloc extends FormBloc<ProductFilterModel, String> {
@@ -14,12 +14,12 @@ class FilterModalBloc extends FormBloc<ProductFilterModel, String> {
   late final MultiSelectFieldBloc<String> categories;
   late final Stream<List<int>> selectedFiltersCountStream;
 
-  final CategoriesRepository categoriesRepository;
   final ProductFilterModel? initialFilter;
+  final CategoriesRepository categoriesRepository;
 
   FilterModalBloc({
-    required this.categoriesRepository,
     @factoryParam this.initialFilter,
+    required this.categoriesRepository,
   }) {
     productSort = SelectFieldBloc(
       options: ProductSortOrderType.values,
@@ -91,12 +91,4 @@ class FilterModalBloc extends FormBloc<ProductFilterModel, String> {
     );
   }
 
-  @override
-  FutureOr<void> reset() {
-    productSort.updateInitial(null);
-    priceRanges.updateInitial(const []);
-    categories.updateInitial(const []);
-
-    super.reset();
-  }
 }

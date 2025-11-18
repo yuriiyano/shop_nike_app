@@ -7,7 +7,6 @@ import 'package:darq/darq.dart';
 
 import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/repositories/index.dart';
-import 'package:shop_nike_app/models/filter/product_filter_model.dart';
 
 part 'shop_event.dart';
 part 'shop_state.dart';
@@ -92,22 +91,21 @@ class ShopBloc
     }
 
     if (state.filter != null) {
-      if (state.filter!.productSortOrderType != null &&
-          visibleData.isNotEmpty) {
+      if (state.filter!.productSortOrderType != null) {
         visibleData = state.sortProducts(
           products: visibleData,
           sortType: state.filter!.productSortOrderType,
         );
       }
 
-      if (state.filter!.priceRange.isNotEmpty && visibleData.isNotEmpty) {
+      if (state.filter!.priceRange.isNotEmpty) {
         visibleData = state.filterByPrice(
           products: visibleData,
           priceRanges: state.filter!.priceRange,
         );
       }
 
-      if (state.filter!.categories.isNotEmpty && visibleData.isNotEmpty) {
+      if (state.filter!.categories.isNotEmpty) {
         visibleData = state.filterByCategories(
           products: visibleData,
           categories: state.filter!.categories,

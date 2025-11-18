@@ -6,6 +6,8 @@ class JsonDataParser {
 
   JsonDataParser() {
     // Register default converters if needed
+    _converters[List<String>] = (input) =>
+        (input as List).cast<String>().toList();
   }
 
   void registerType<T>(JsonConverter<T> converter) {

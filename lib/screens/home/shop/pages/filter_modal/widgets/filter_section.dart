@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:shop_nike_app/styles/index.dart';
 
 class FilterSection extends StatelessWidget {
-  final String name;
-  final Widget child;
-
   const FilterSection({
     super.key,
     required this.name,
     required this.child,
   });
+
+  final String name;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

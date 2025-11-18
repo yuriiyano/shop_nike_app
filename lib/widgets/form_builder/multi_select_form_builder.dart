@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 class MultiSelectFormBuilder<ValueType> extends StatelessWidget {
-  final MultiSelectFieldBloc<ValueType> fieldBloc;
-  final String Function(ValueType) optionLabel;
-
   const MultiSelectFormBuilder({
     super.key,
     required this.fieldBloc,
     required this.optionLabel,
   });
+
+  final MultiSelectFieldBloc<ValueType> fieldBloc;
+  final String Function(ValueType) optionLabel;
 
   @override
   Widget build(BuildContext context) {

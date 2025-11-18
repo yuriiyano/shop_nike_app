@@ -1,3 +1,12 @@
+part 'product_filter_model.a.dart';
+
+enum ProductSortOrderType {
+  lowHigh,
+  highLow,
+  aZ,
+  zA,
+}
+
 class ProductFilterModel {
   final ProductSortOrderType? productSortOrderType;
   final List<PriceRange> priceRange;
@@ -14,27 +23,9 @@ class ProductFilterModel {
   }
 }
 
-enum ProductSortOrderType {
-  lowHigh,
-  highLow,
-  aZ,
-  zA,
-}
-
-extension ProductSortOrderTypeX on ProductSortOrderType {
-  String get label => switch (this) {
-    ProductSortOrderType.lowHigh => 'Price: Low-High',
-    ProductSortOrderType.highLow => 'Price: High-Low',
-    ProductSortOrderType.aZ => 'Name: A-Z',
-    ProductSortOrderType.zA => 'Name: Z-A',
-  };
-}
-
 class PriceRange {
-  const PriceRange({required this.min, this.max});
-
   final double min;
   final double? max;
 
-  String get label => '\$$min${max == null ? '+' : '-\$$max'}';
+  const PriceRange({required this.min, this.max});
 }
