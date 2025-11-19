@@ -12,6 +12,7 @@ class TextInput extends StatefulWidget {
     this.autocorrect = false,
     this.textInputAction,
     this.textInputType,
+    this.enableInteractiveSelection,
     this.fieldFocusNode,
     this.nextFieldFocusNode,
     this.onChanged,
@@ -30,6 +31,7 @@ class TextInput extends StatefulWidget {
   final bool autocorrect;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
+  final bool? enableInteractiveSelection;
 
   final FocusNode? fieldFocusNode;
   final FocusNode? nextFieldFocusNode;
@@ -79,6 +81,7 @@ class _TextInputState extends State<TextInput> {
           autocorrect: widget.autocorrect,
           textInputAction: widget.textInputAction,
           keyboardType: widget.textInputType,
+          enableInteractiveSelection: widget.enableInteractiveSelection,
           focusNode: widget.fieldFocusNode,
           onChanged: widget.onChanged,
           onSubmitted: widget.onSubmitted,

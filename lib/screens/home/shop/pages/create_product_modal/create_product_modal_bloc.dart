@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
-
 import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -28,45 +26,33 @@ class CreateProductModalBloc extends FormBloc<Product, String> {
     title = TextFieldBloc(
       required: true,
       rules: {ValidationType.onBlur},
-      customValidators: {CreateProductValidators.titleMin10Chars},
-      data: CreateProductTextFieldExtraData(
-        label: 'Title',
-        hintText: 'e.g. "Red Ball"',
-      ),
+      customValidators: {
+        (value) => AppValidator.fieldMinChars(string: value, min: 10),
+      },
     );
 
     price = TextFieldBloc(
       required: true,
       rules: {ValidationType.onBlur},
       customValidators: {
-        CreateProductValidators.price2Digit,
-        CreateProductValidators.priceRange,
+        (value) => AppValidator.numbersRange(string: value, min: 10, max: 1000),
+        AppValidator.validateNoLeadingZeros,
+        (value) => AppValidator.validateDecimalPlaces(string: value),
       },
-      data: CreateProductTextFieldExtraData(
-        label: 'Price',
-        hintText: 'e.g. 12.99',
-        textInputType: const TextInputType.numberWithOptions(decimal: true),
-      ),
     );
 
     description = TextFieldBloc(
       required: true,
       rules: {ValidationType.onBlur},
-      customValidators: {CreateProductValidators.descLen},
-      data: CreateProductTextFieldExtraData(
-        label: 'Description',
-        hintText: 'e.g. size, color, use',
-      ),
+      customValidators: {
+        (value) => AppValidator.charsRange(string: value, min: 20, max: 200),
+      },
     );
 
     imageUrl = TextFieldBloc(
       required: true,
       rules: {ValidationType.onBlur},
-      customValidators: {CreateProductValidators.imageUrl},
-      data: CreateProductTextFieldExtraData(
-        label: 'Image URL',
-        hintText: 'e.g. https://example.com/img.png',
-      ),
+      customValidators: {AppValidator.imageUrl},
     );
 
     category = SelectFieldBloc(
@@ -94,8 +80,8 @@ class CreateProductModalBloc extends FormBloc<Product, String> {
         ..changeOptions(categoriesList)
         ..changeValue(categoriesList.first);
       emitInitial();
-    } catch (e) {
-      addError(e);
+    } catch (e, stackTrace) {
+      addError(e, stackTrace);
       emitFailure();
     }
   }
@@ -103,8 +89,8 @@ class CreateProductModalBloc extends FormBloc<Product, String> {
   @override
   FutureOr<void> onSubmit() async {
     try {
-      final product = await productsRepository.postProduct(
-        Product.idGenerated(
+      final product = await productsRepository.createProduct(
+        Product(
           title: title.value!,
           price: double.parse(price.value!),
           description: description.value!,
@@ -112,23 +98,11 @@ class CreateProductModalBloc extends FormBloc<Product, String> {
           category: category.value!,
         ),
       );
-      
+
       emitSuccess(product);
-    } catch (e) {
-      addError(e);
+    } catch (e, stackTrace) {
+      addError(e, stackTrace);
       emitFailure();
     }
   }
-}
-
-class CreateProductTextFieldExtraData {
-  final String label;
-  final String hintText;
-  final TextInputType? textInputType;
-
-  CreateProductTextFieldExtraData({
-    required this.label,
-    required this.hintText,
-    this.textInputType,
-  });
 }

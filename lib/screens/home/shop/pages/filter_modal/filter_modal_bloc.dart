@@ -74,8 +74,8 @@ class FilterModalBloc extends FormBloc<ProductFilterModel, String> {
         ..changeValue(initialFilter?.categories ?? []);
 
       emitInitial();
-    } catch (e) {
-      addError(e);
+    } catch (e, stackTrace) {
+      addError(e, stackTrace);
       emitFailure();
     }
   }

@@ -20,7 +20,7 @@ class ProductsRepository {
     );
   }
 
-  Future<Product> postProduct(Product product) {
+  Future<Product> createProduct(Product product) {
     return httpClient.post<Product>(
       '/products',
       data: product.toJson(),

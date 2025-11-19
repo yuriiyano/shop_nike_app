@@ -1,8 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stx_flutter_form_bloc/stx_flutter_form_bloc.dart';
 
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/services/index.dart';
@@ -12,7 +10,7 @@ import 'package:shop_nike_app/models/index.dart';
 import 'create_product_modal_bloc.dart';
 
 @RoutePage()
-class CreateProductModalScreen extends StatefulWidget
+class CreateProductModalScreen extends StatelessWidget
     implements AutoRouteWrapper {
   const CreateProductModalScreen({super.key});
 
@@ -22,35 +20,6 @@ class CreateProductModalScreen extends StatefulWidget
       create: (context) => getIt<CreateProductModalBloc>()..initialize(),
       child: this,
     );
-  }
-
-  @override
-  State<CreateProductModalScreen> createState() =>
-      _CreateProductModalScreenState();
-}
-
-class _CreateProductModalScreenState extends State<CreateProductModalScreen> {
-  late List<FocusNode> fieldFocusNodes = [];
-
-  @override
-  void initState() {
-    super.initState();
-    context
-        .read<CreateProductModalBloc>()
-        .fields
-        .values
-        .whereType<TextFieldBloc>()
-        .forEach((fieldBloc) {
-          fieldFocusNodes.add(FocusNode(debugLabel: fieldBloc.name));
-        });
-  }
-
-  @override
-  void dispose() {
-    for (final focusNode in fieldFocusNodes) {
-      focusNode.dispose();
-    }
-    super.dispose();
   }
 
   @override
@@ -97,41 +66,34 @@ class _CreateProductModalScreenState extends State<CreateProductModalScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ...formBloc.fields.values
-                        .whereType<TextFieldBloc>()
-                        .toList()
-                        .asMap()
-                        .entries
-                        .map(
-                          (entry) {
-                            final idx = entry.key;
-                            final fieldBloc = entry.value;
-                            return [
-                              TextInputFormBuilder(
-                                fieldBloc: fieldBloc,
-                                fieldFocusNode: fieldFocusNodes[idx],
-                                nextFieldFocusNode:
-                                    idx < fieldFocusNodes.length - 1
-                                    ? fieldFocusNodes[idx + 1]
-                                    : null,
-                                hintText:
-                                    (fieldBloc.data
-                                            as CreateProductTextFieldExtraData)
-                                        .hintText,
-                                label:
-                                    (fieldBloc.data
-                                            as CreateProductTextFieldExtraData)
-                                        .label,
-                                textInputType:
-                                    (fieldBloc.data
-                                            as CreateProductTextFieldExtraData)
-                                        .textInputType,
-                              ),
-                              const SizedBox(height: 20),
-                            ];
-                          },
-                        )
-                        .flattened,
+                    TextInputFormBuilder(
+                      fieldBloc: formBloc.title,
+                      label: 'Title',
+                      hintText: 'e.g. "Red Ball"',
+                    ),
+                    const SizedBox(height: 20),
+                    TextInputFormBuilder(
+                      fieldBloc: formBloc.price,
+                      label: 'Price',
+                      hintText: 'e.g. 12.99',
+                      textInputType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
+                      enableInteractiveSelection: false,
+                    ),
+                    const SizedBox(height: 20),
+                    TextInputFormBuilder(
+                      fieldBloc: formBloc.description,
+                      label: 'Description',
+                      hintText: 'e.g. size, color, use',
+                    ),
+                    const SizedBox(height: 20),
+                    TextInputFormBuilder(
+                      fieldBloc: formBloc.imageUrl,
+                      label: 'Image URL',
+                      hintText: 'e.g. https://example.com/img.png',
+                    ),
+                    const SizedBox(height: 20),
                     FormFieldSection(
                       name: 'Category',
                       horizontalPadding: 0,
