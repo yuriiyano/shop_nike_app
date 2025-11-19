@@ -6,11 +6,9 @@ import 'package:collection/collection.dart';
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/services/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
-import 'package:shop_nike_app/widgets/buttons/index.dart';
-import 'package:shop_nike_app/widgets/form_builder/index.dart';
 import 'package:shop_nike_app/models/index.dart';
+import 'package:shop_nike_app/widgets/index.dart';
 import 'filter_modal_bloc.dart';
-import 'widgets/index.dart';
 
 @RoutePage()
 class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
@@ -77,7 +75,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                         ],
                       ),
                     ),
-                    FilterSection(
+                    FormFieldSection(
                       name: 'Sort By',
                       child: RadioSelectFormBuilder<ProductSortOrderType>(
                         fieldBloc: formBloc.productSort,
@@ -90,7 +88,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                       color: Color.fromARGB(255, 228, 228, 228),
                       height: 2,
                     ),
-                    FilterSection(
+                    FormFieldSection(
                       name: 'Shop By Price',
                       child: MultiSelectFormBuilder<PriceRange>(
                         fieldBloc: formBloc.priceRanges,
@@ -103,7 +101,7 @@ class FilterModalScreen extends StatelessWidget implements AutoRouteWrapper {
                       color: Color.fromARGB(255, 228, 228, 228),
                       height: 2,
                     ),
-                    FilterSection(
+                    FormFieldSection(
                       name: 'Shop By Categoty',
                       child: MultiSelectFormBuilder<String>(
                         fieldBloc: formBloc.categories,

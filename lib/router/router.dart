@@ -40,6 +40,7 @@ class AppRouter extends RootStackRouter {
             AutoRoute(page: ProductDetailsRoute.page),
             AutoRoute(page: SearchModalRoute.page),
             AutoRoute(page: FilterModalRoute.page),
+            AutoRoute(page: CreateProductModalRoute.page),
             AutoRoute(page: ChatDetailsRoute.page),
           ],
         ),

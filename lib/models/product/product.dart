@@ -16,6 +16,7 @@ sealed class Product with _$Product {
     @Default(false) @JsonKey(includeFromJson: false, includeToJson: false) bool isFavorite,
   }) = _Product;
 
+
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
 }

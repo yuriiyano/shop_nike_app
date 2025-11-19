@@ -19,4 +19,11 @@ class ProductsRepository {
       queryParameters: limit != null ? {'limit': max(1, limit)} : null,
     );
   }
+
+  Future<Product> createProduct(Product product) {
+    return httpClient.post<Product>(
+      '/products',
+      data: product.toJson(),
+    );
+  }
 }

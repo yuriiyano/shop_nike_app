@@ -61,6 +61,20 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
             icon: Assets.images.shop.search.svg(width: 24),
           ),
         ],
+        leading: IconButton(
+          icon: const Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          iconSize: 24,
+          onPressed: () async {
+            final createdProduct = await context.router.push<Product?>(
+              const CreateProductModalRoute(),
+            );
+            if (createdProduct == null) return;
+            shopBloc.addItem(createdProduct);
+          },
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: shopBloc.loadAsyncFuture,
