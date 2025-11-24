@@ -19,6 +19,8 @@ import 'package:shop_nike_app/blocs/categories/categories_bloc.dart' as _i155;
 import 'package:shop_nike_app/blocs/index.dart' as _i370;
 import 'package:shop_nike_app/models/index.dart' as _i538;
 import 'package:shop_nike_app/repositories/auth_repository.dart' as _i380;
+import 'package:shop_nike_app/repositories/cart/cart_repository.dart' as _i1072;
+import 'package:shop_nike_app/repositories/cart/cart_storage.dart' as _i802;
 import 'package:shop_nike_app/repositories/categories_repository.dart' as _i802;
 import 'package:shop_nike_app/repositories/chats_repository.dart' as _i970;
 import 'package:shop_nike_app/repositories/favorite_products/favorite_products_repository.dart'
@@ -29,6 +31,11 @@ import 'package:shop_nike_app/repositories/index.dart' as _i893;
 import 'package:shop_nike_app/repositories/posts_repository.dart' as _i399;
 import 'package:shop_nike_app/repositories/products_repository.dart' as _i616;
 import 'package:shop_nike_app/repositories/user_repository.dart' as _i447;
+import 'package:shop_nike_app/screens/home/cart/bloc/cart_bloc.dart' as _i460;
+import 'package:shop_nike_app/screens/home/cart/pages/add_to_cart/add_to_cart_bloc.dart'
+    as _i648;
+import 'package:shop_nike_app/screens/home/cart/pages/receiver_information/receiver_information_bloc.dart'
+    as _i605;
 import 'package:shop_nike_app/screens/home/dashboard/dashboard_bloc.dart'
     as _i260;
 import 'package:shop_nike_app/screens/home/dashboard1_test/bloc/dashboard1_bloc.dart'
@@ -62,8 +69,14 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i720.SearchModalBloc>(() => _i720.SearchModalBloc());
+    gh.factory<_i605.ReceiverInformationBloc>(
+      () => _i605.ReceiverInformationBloc(),
+    );
     gh.factory<_i552.FavoriteProductsStorage>(
       () => _i552.FavoriteProductsStorage(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i802.CartStorage>(
+      () => _i802.CartStorage(gh<_i460.SharedPreferences>()),
     );
     gh.factory<_i990.FavoriteProductsRepository>(
       () => _i990.FavoriteProductsRepository(
@@ -87,6 +100,9 @@ extension GetItInjectableX on _i174.GetIt {
         initialFilter: initialFilter,
         categoriesRepository: gh<_i893.CategoriesRepository>(),
       ),
+    );
+    gh.factory<_i1072.CartRepository>(
+      () => _i1072.CartRepository(cartStorage: gh<_i802.CartStorage>()),
     );
     gh.lazySingleton<_i260.DashboardBloc>(
       () => _i260.DashboardBloc(
@@ -118,6 +134,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i468.ChatsBloc>(
       () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),
     );
+    gh.lazySingleton<_i460.CartBloc>(
+      () => _i460.CartBloc(
+        cartRepository: gh<_i893.CartRepository>(),
+        productsRepository: gh<_i893.ProductsRepository>(),
+      ),
+    );
     gh.lazySingleton<_i53.PostsBloc>(
       () => _i53.PostsBloc(postsRepository: gh<_i893.PostsRepository>()),
     );
@@ -126,6 +148,10 @@ extension GetItInjectableX on _i174.GetIt {
         categoriesBloc: gh<_i370.CategoriesBloc>(),
         productsRepository: gh<_i893.ProductsRepository>(),
       ),
+    );
+    gh.factoryParam<_i648.AddToCartBloc, _i538.Product, int?>(
+      (product, cartCountInitial) =>
+          _i648.AddToCartBloc(product, cartCountInitial, gh<_i370.CartBloc>()),
     );
     return this;
   }

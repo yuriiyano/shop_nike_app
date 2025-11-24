@@ -10,6 +10,7 @@ import 'package:shop_nike_app/models/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
 import 'package:shop_nike_app/widgets/index.dart';
 import 'package:shop_nike_app/screens/home/dashboard/widgets/index.dart';
+import 'package:shop_nike_app/screens/home/cart/pages/add_to_cart/add_to_cart_dialog.dart';
 
 @RoutePage()
 class ProductDetailsScreen extends StatelessWidget {
@@ -20,6 +21,7 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shopBloc = context.read<ShopBloc>();
+    final cartBloc = context.read<CartBloc>();
 
     final deviceWidth = MediaQuery.sizeOf(context).width;
     final imageHeight = deviceWidth * 1.2;
@@ -124,11 +126,47 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 43),
-                    CustomOutlinedButton(
-                      text: 'Add to Bag',
-                      onPressed: () {},
-                      width: double.infinity,
-                      backgroundColor: Colors.black,
+                    BlocSelector<CartBloc, CartState, int>(
+                      selector: (state) {
+                        return cartBloc.productItemsCount(
+                          productId: product.id,
+                          cartState: state,
+                        );
+                      },
+                      builder: (context, itemsCount) {
+                        var itemsCountString = '';
+                        if (itemsCount != 0) {
+                          itemsCountString = ' ($itemsCount)';
+                        }
+                        return CustomOutlinedButton(
+                          text: 'Add to Bag$itemsCountString',
+                          onPressed: () {
+                            if (itemsCount == product.rating.count) {
+                              ScaffoldMessenger.of(
+                                  context,
+                                )
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor: Colors.black,
+                                    content: Text(
+                                      "Sorry, a maximum product count limit's been reached",
+                                      style: TextStyle(
+                                        fontFamily: FontFamily.heebo,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              return;
+                            }
+                            AddToCartdDialog.show(context, product: product);
+                          },
+                          width: double.infinity,
+                          backgroundColor: Colors.black,
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
                     BlocSelector<ShopBloc, ShopState, bool>(

@@ -44,9 +44,7 @@ abstract final class AppValidator {
     required int max,
   }) {
     if (string != null && string.isNotEmpty) {
-      print(string);
       final number = double.tryParse(string.replaceAll(',', '.'));
-      print(number);
       if (number != null && number >= min && number <= max) {
         return null;
       }

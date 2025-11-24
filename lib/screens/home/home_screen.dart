@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:shop_nike_app/localization/index.dart';
 import 'package:shop_nike_app/router/index.dart';
 import 'package:shop_nike_app/widgets/index.dart';
 import 'package:shop_nike_app/styles/index.dart';
@@ -17,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         DashboardRoute(),
         ShopRoute(),
         FavouritesRoute(),
-        SettingsRoute(),
+        CartRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return DecoratedBox(
@@ -62,9 +61,9 @@ class HomeScreen extends StatelessWidget {
                 ),
                 label: 'Favourites',
               ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.settings),
-                label: context.tr(LocaleKeys.settings),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart),
+                label: 'Bag',
               ),
             ],
           ),

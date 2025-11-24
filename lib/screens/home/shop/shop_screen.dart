@@ -15,6 +15,7 @@ class ShopScreen extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     context.read<ShopBloc>().load();
+    context.read<CartBloc>().initLoadAsyncFuture();
 
     return this;
   }
