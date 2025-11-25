@@ -27,6 +27,7 @@ class AppRouter extends RootStackRouter {
                 AutoRoute(page: DashboardRoute.page),
                 AutoRoute(page: ShopRoute.page),
                 AutoRoute(page: FavouritesRoute.page),
+                AutoRoute(page: CartRoute.page),
                 AutoRoute(
                   page: MessagesRoute.page,
                   children: [
@@ -42,6 +43,8 @@ class AppRouter extends RootStackRouter {
             AutoRoute(page: FilterModalRoute.page),
             AutoRoute(page: CreateProductModalRoute.page),
             AutoRoute(page: ChatDetailsRoute.page),
+            AutoRoute(page: ReceiverInformationRoute.page),
+            AutoRoute(page: CheckoutRoute.page),
           ],
         ),
       ],

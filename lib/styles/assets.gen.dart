@@ -24,6 +24,9 @@ class $ResourcesGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/cart
+  $AssetsImagesCartGen get cart => const $AssetsImagesCartGen();
+
   /// Directory path: assets/images/dashboard
   $AssetsImagesDashboardGen get dashboard => const $AssetsImagesDashboardGen();
 
@@ -52,6 +55,21 @@ class $ResourcesLangsGen {
 
   /// List of all assets
   List<String> get values => [enUS, frFR];
+}
+
+class $AssetsImagesCartGen {
+  const $AssetsImagesCartGen();
+
+  /// File path: assets/images/cart/cart_circle.png
+  AssetGenImage get cartCircle =>
+      const AssetGenImage('assets/images/cart/cart_circle.png');
+
+  /// File path: assets/images/cart/checked_circle.png
+  AssetGenImage get checkedCircle =>
+      const AssetGenImage('assets/images/cart/checked_circle.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [cartCircle, checkedCircle];
 }
 
 class $AssetsImagesDashboardGen {
