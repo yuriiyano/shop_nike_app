@@ -13,8 +13,28 @@ class CartRepository {
     return cartStorage.getCartProducts();
   }
 
-  Future<bool> createProductInToCart(CartProductCacheModel cartProductCacheModel) {
-    return cartStorage.createProductInToCart(cartProductCacheModel);
+  Future<int> addProductInCart({
+    required int productId,
+    required int cartCount,
+  }) {
+    return cartStorage.addProductInCart(
+      CartProductCacheModel(
+        productId: productId,
+        cartCount: cartCount,
+      ),
+    );
+  }
+
+  Future<int> updateProductInCart({
+    required int productId,
+    required int cartCount,
+  }) {
+    return cartStorage.updateProductInCart(
+      CartProductCacheModel(
+        productId: productId,
+        cartCount: cartCount,
+      ),
+    );
   }
 
   Future<bool> deleteProductFromCart(int productId) {

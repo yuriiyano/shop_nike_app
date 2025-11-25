@@ -58,8 +58,19 @@ class AddToCartMainContent extends StatelessWidget {
                 width: deviceWidth * 0.4,
                 child: NumberPickerFormBuilder(
                   fieldBloc: formBloc.itemsCount,
-                  productItemsSelectedCount: productItemsSelectedCount,
-                  isEditing: formBloc.isEditing,
+                  valueValidator: (int newValue) {
+                    if (newValue <= 0) return false;
+
+                    var finalSelectedCount = newValue;
+                    if (!formBloc.isEditing) {
+                      finalSelectedCount += productItemsSelectedCount;
+                    }
+
+                    final allowedRange =
+                        formBloc.itemsCount.extraData as NumberRange;
+                    return finalSelectedCount >= allowedRange.min &&
+                        finalSelectedCount <= allowedRange.max;
+                  },
                 ),
               ),
             ],

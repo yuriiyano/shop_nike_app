@@ -47,12 +47,44 @@ class CartStorage {
     return cartProductsMap.values.toList();
   }
 
-  Future<bool> createProductInToCart(
+  Future<int> addProductInCart(
     CartProductCacheModel cartProductCacheModel,
   ) async {
     final cartProducts = await _getCartProductCacheModelsMap();
+    final cartProductCacheModelFresh =
+        cartProducts[cartProductCacheModel.productId];
+
+    var cartProductCacheModelToAdd = cartProductCacheModel;
+    if (cartProductCacheModelFresh != null) {
+      cartProductCacheModelToAdd = cartProductCacheModelToAdd.copyWith(
+        cartCount:
+            cartProductCacheModelToAdd.cartCount +
+            cartProductCacheModelFresh.cartCount,
+      );
+    }
+
+    cartProducts[cartProductCacheModel.productId] = cartProductCacheModelToAdd;
+    final success = await _writeCartProductsCacheModelsToStorage(cartProducts);
+
+    if (!success) {
+      throw Exception('Failed to add product to cart with id ${cartProductCacheModel.productId}');
+    }
+    return cartProductCacheModelToAdd.cartCount;
+  }
+
+  Future<int> updateProductInCart(
+    CartProductCacheModel cartProductCacheModel,
+  ) async {
+    final cartProducts = await _getCartProductCacheModelsMap();
+
     cartProducts[cartProductCacheModel.productId] = cartProductCacheModel;
-    return _writeCartProductsCacheModelsToStorage(cartProducts);
+    final success = await _writeCartProductsCacheModelsToStorage(cartProducts);
+
+    if (!success) {
+      throw Exception('Failed to update product to cart with id ${cartProductCacheModel.productId}');
+    }
+
+    return cartProductCacheModel.cartCount;
   }
 
   Future<bool> deleteProductFromCart(int productId) async {

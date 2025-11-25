@@ -76,7 +76,7 @@ class CustomCartProductListTile extends StatelessWidget {
               ),
             ),
             Text(
-              '\$${context.read<CartBloc>().singleProductTotalCost(cartProduct).toStringAsFixed(2)}',
+              '\$${context.read<CartBloc>().state.singleProductTotalCost(cartProduct).toStringAsFixed(2)}',
               style: const TextStyle(
                 fontFamily: FontFamily.heebo,
                 fontWeight: FontWeight.w700,

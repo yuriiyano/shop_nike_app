@@ -144,7 +144,7 @@ class CheckoutScreen extends StatelessWidget {
                             ),
                             TextSpan(
                               text:
-                                  '\$${cartBloc.allProductsTotalCost().toStringAsFixed(2)}',
+                                  '\$${cartBloc.state.allProductsTotalCost().toStringAsFixed(2)}',
                               style: const TextStyle(
                                 fontFamily: FontFamily.heebo,
                                 fontWeight: FontWeight.w700, // bolder

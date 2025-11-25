@@ -108,7 +108,7 @@ class CartScreen extends StatelessWidget implements AutoRouteWrapper {
                                     ),
                                   ),
                                   Text(
-                                    '\$${cartBloc.allProductsTotalCost().toStringAsFixed(2)}',
+                                    '\$${cartBloc.state.allProductsTotalCost().toStringAsFixed(2)}',
                                     style: const TextStyle(
                                       fontFamily: FontFamily.heebo,
                                       fontWeight: FontWeight.w700,

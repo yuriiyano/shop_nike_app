@@ -128,7 +128,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     const SizedBox(height: 43),
                     BlocSelector<CartBloc, CartState, int>(
                       selector: (state) {
-                        return cartBloc.productItemsCount(
+                        return cartBloc.state.productItemsCount(
                           productId: product.id,
                           cartState: state,
                         );

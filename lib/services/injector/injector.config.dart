@@ -131,6 +131,13 @@ extension GetItInjectableX on _i174.GetIt {
         favoriteProductsRepository: gh<_i893.FavoriteProductsRepository>(),
       ),
     );
+    gh.factoryParam<_i648.AddToCartBloc, _i538.Product, int?>(
+      (product, cartCountInitial) => _i648.AddToCartBloc(
+        product,
+        cartCountInitial,
+        gh<_i893.CartRepository>(),
+      ),
+    );
     gh.lazySingleton<_i468.ChatsBloc>(
       () => _i468.ChatsBloc(chatsRepository: gh<_i893.ChatsRepository>()),
     );
@@ -148,10 +155,6 @@ extension GetItInjectableX on _i174.GetIt {
         categoriesBloc: gh<_i370.CategoriesBloc>(),
         productsRepository: gh<_i893.ProductsRepository>(),
       ),
-    );
-    gh.factoryParam<_i648.AddToCartBloc, _i538.Product, int?>(
-      (product, cartCountInitial) =>
-          _i648.AddToCartBloc(product, cartCountInitial, gh<_i370.CartBloc>()),
     );
     return this;
   }

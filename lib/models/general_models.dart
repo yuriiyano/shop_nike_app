@@ -12,3 +12,10 @@ enum AuthStatus {
   bool get isUnauthenticated => this == unauthenticated;
   bool get isAuthenticated => this == authenticated;
 }
+
+class NumberRange {
+  final int min;
+  final int max;
+
+  const NumberRange({required this.min, required this.max});
+}
